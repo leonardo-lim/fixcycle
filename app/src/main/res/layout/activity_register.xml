@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RegisterActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/register_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/register"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/register_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Register"
+            android:textSize="28sp"
+            android:textColor="@color/navy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_img" />
+
+        <TextView
+            android:id="@+id/name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:text="Name"
+            android:textColor="@color/brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/register_text" />
+
+        <EditText
+            android:id="@+id/name_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/brown_ic_baseline_person_16"
+            android:backgroundTint="@color/navy"
+            android:hint="Enter your name"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:textColorHint="@color/beige"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_text" />
+
+        <TextView
+            android:id="@+id/email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Email"
+            android:textColor="@color/brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name_input" />
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/brown_ic_baseline_email_16"
+            android:backgroundTint="@color/navy"
+            android:hint="Enter your email"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:textColorHint="@color/beige"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_text" />
+
+        <TextView
+            android:id="@+id/password_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Password"
+            android:textColor="@color/brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/email_input" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/brown_ic_baseline_lock_16"
+            android:backgroundTint="@color/navy"
+            android:hint="Enter your password"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:textColorHint="@color/beige"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_text" />
+
+        <TextView
+            android:id="@+id/confirm_password_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Confirm Password"
+            android:textColor="@color/brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_input" />
+
+        <EditText
+            android:id="@+id/confirm_password_input"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/brown_ic_baseline_lock_16"
+            android:backgroundTint="@color/navy"
+            android:hint="Confirm your password"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:textColorHint="@color/beige"
+            android:inputType="textPassword"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_password_text" />
+
+        <Button
+            android:id="@+id/register_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_marginTop="20dp"
+            android:paddingHorizontal="15dp"
+            android:background="@drawable/blue_rounded_button"
+            android:drawableStart="@drawable/beige_ic_baseline_person_add_alt_1_16"
+            android:text=" Register"
+            android:textSize="14sp"
+            android:textColor="@color/beige"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirm_password_input" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
