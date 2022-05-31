@@ -1,14 +1,16 @@
-package com.leo.fixcycle;
+package com.leo.fixcycle.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class StartActivity extends AppCompatActivity {
+import com.leo.fixcycle.R;
+
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_register);
     }
 }

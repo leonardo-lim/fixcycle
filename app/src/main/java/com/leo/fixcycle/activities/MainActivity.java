@@ -1,8 +1,10 @@
-package com.leo.fixcycle;
+package com.leo.fixcycle.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.leo.fixcycle.R;
 
 public class MainActivity extends AppCompatActivity {
 
