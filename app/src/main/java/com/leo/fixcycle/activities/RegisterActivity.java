@@ -2,9 +2,19 @@ package com.leo.fixcycle.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.leo.fixcycle.R;
+import com.leo.fixcycle.models.User;
+import com.leo.fixcycle.networks.UserClient;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -12,5 +22,73 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        Button registerButton = findViewById(R.id.register_btn);
+        registerButton.setOnClickListener(view -> register());
+    }
+
+    private void register() {
+        EditText nameInput = findViewById(R.id.name_input);
+        EditText emailInput = findViewById(R.id.email_input);
+        EditText passwordInput = findViewById(R.id.password_input);
+        EditText confirmPasswordInput = findViewById(R.id.confirm_password_input);
+
+        String name = nameInput.getText().toString();
+        String email = emailInput.getText().toString();
+        String password = passwordInput.getText().toString();
+        String confirmPassword = confirmPasswordInput.getText().toString();
+
+        if (!isValidUser(name, email, password, confirmPassword)) {
+            return;
+        }
+
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPassword(password);
+
+        UserClient call = new UserClient();
+
+        call.getApi().saveUser(user).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.code() == 201) {
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    showToast("Registration successful. You can login now");
+                } else if (response.code() == 400) {
+                    showToast("User already exists");
+                } else {
+                    showToast("Unexpected server error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private boolean isValidUser(String name, String email, String password, String confirmPassword) {
+        boolean isValid = false;
+
+        if (name.matches("")) {
+            showToast("Name input is required");
+        } else if (email.matches("")) {
+            showToast("Email input is required");
+        } else if (password.matches("")) {
+            showToast("Password input is required");
+        } else if (!password.equals(confirmPassword)) {
+            showToast("Password doesn't match");
+        } else {
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(RegisterActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }
