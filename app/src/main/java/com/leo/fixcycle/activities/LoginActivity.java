@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login() {
         EditText emailInput = findViewById(R.id.email_input);
         EditText passwordInput = findViewById(R.id.password_input);
+        ProgressBar loading = findViewById(R.id.loading);
 
         String email = emailInput.getText().toString();
         String password = passwordInput.getText().toString();
@@ -47,6 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         user.setPassword(password);
 
         UserClient call = new UserClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().getUser(user).enqueue(new Callback<User>() {
             @Override
@@ -62,11 +66,14 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     showToast("Unexpected server error");
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }

@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
@@ -32,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText emailInput = findViewById(R.id.email_input);
         EditText passwordInput = findViewById(R.id.password_input);
         EditText confirmPasswordInput = findViewById(R.id.confirm_password_input);
+        ProgressBar loading = findViewById(R.id.loading);
 
         String name = nameInput.getText().toString();
         String email = emailInput.getText().toString();
@@ -48,6 +51,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.setPassword(password);
 
         UserClient call = new UserClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().saveUser(user).enqueue(new Callback<User>() {
             @Override
@@ -56,16 +60,20 @@ public class RegisterActivity extends AppCompatActivity {
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                     showToast("Registration successful. You can login now");
+                    finish();
                 } else if (response.code() == 400) {
                     showToast("User already exists");
                 } else {
                     showToast("Unexpected server error");
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
