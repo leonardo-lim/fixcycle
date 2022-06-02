@@ -7,6 +7,9 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface UserService {
+    @POST("login")
+    Call<User> getUser(@Body User user);
+
     @POST("users/add")
     Call<User> saveUser(@Body User user);
 }
