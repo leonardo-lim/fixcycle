@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="15dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_navy"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/motorcycle_img"
+            android:layout_width="110dp"
+            android:layout_height="105dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <TextView
+            android:id="@+id/motorcycle_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/motorcycle_img"
+            android:text="Forza"
+            android:maxLength="9"
+            android:maxLines="1"
+            android:textColor="@color/beige"
+            android:ellipsize="end"
+            android:textSize="24sp"/>
+
+        <TextView
+            android:id="@+id/motorcycle_brand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/motorcycle_name"
+            android:textColor="@color/white"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:text="Honda"
+            android:padding="8dp"/>
+
+        <TextView
+            android:id="@+id/motorcycle_license_plate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/motorcycle_name"
+            android:layout_toEndOf="@+id/motorcycle_img"
+            android:textSize="20sp"
+            android:text="D 123 XX"
+            android:textColor="@color/white"
+            android:paddingEnd="10dp"
+            android:paddingVertical="10dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="See Details"
+            android:textAllCaps="false"
+            android:background="@drawable/button_selector"
+            android:layout_toEndOf="@id/motorcycle_img"
+            android:layout_below="@id/motorcycle_license_plate"/>
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
