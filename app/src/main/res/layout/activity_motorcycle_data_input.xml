@@ -48,28 +48,28 @@
             app:layout_constraintTop_toBottomOf="@+id/license_plate_text" />
 
         <TextView
-            android:id="@+id/owner_name_text"
+            android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
-            android:text="Owner Name"
+            android:text="Name"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/license_plate_input" />
 
         <EditText
-            android:id="@+id/owner_name_input"
+            android:id="@+id/name_input"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
             android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle owner name"
+            android:hint="Enter your motorcycle name"
             android:textSize="14sp"
             android:textColor="@color/navy"
             android:textColorHint="@color/beige"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/owner_name_text" />
+            app:layout_constraintTop_toBottomOf="@+id/name_text" />
 
         <TextView
             android:id="@+id/brand_text"
@@ -80,7 +80,7 @@
             android:text="Brand"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/owner_name_input" />
+            app:layout_constraintTop_toBottomOf="@+id/name_input" />
 
         <EditText
             android:id="@+id/brand_input"
