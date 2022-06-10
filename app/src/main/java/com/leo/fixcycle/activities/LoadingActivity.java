@@ -20,7 +20,7 @@ public class LoadingActivity extends AppCompatActivity {
     }
 
     private void openActivity() {
-        Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
+        Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
