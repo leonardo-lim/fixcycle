@@ -4,6 +4,8 @@ import com.leo.fixcycle.models.User;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 
 public interface UserService {
@@ -12,4 +14,7 @@ public interface UserService {
 
     @POST("register")
     Call<User> saveUser(@Body User user);
+
+    @GET("users")
+    Call<User> getUser(@Header("Authorization") String accessToken);
 }
