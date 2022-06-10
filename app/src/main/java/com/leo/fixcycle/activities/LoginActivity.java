@@ -17,6 +17,11 @@ import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.User;
 import com.leo.fixcycle.networks.UserClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,12 +73,14 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                } else if (response.code() == 400) {
-                    showToast("Incorrect password");
-                } else if (response.code() == 404) {
-                    showToast("User doesn't exist");
-                } else {
-                    showToast("Unexpected server error");
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 loading.setVisibility(View.INVISIBLE);

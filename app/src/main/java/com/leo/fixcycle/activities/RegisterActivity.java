@@ -14,6 +14,11 @@ import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.User;
 import com.leo.fixcycle.networks.UserClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -56,15 +61,19 @@ public class RegisterActivity extends AppCompatActivity {
         call.getApi().saveUser(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.code() == 201) {
+                if (response.isSuccessful() && response.body() != null) {
                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
                     showToast("Registration successful. You can login now");
                     finish();
-                } else if (response.code() == 400) {
-                    showToast("User already exists");
-                } else {
-                    showToast("Unexpected server error");
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 loading.setVisibility(View.INVISIBLE);
