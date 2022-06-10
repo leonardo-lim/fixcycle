@@ -21,7 +21,7 @@ public class StartActivity extends AppCompatActivity {
         String firstTime = sp.getString("isFirstTime", "");
 
         if (firstTime.equals("true")) {
-            Intent intent = new Intent(StartActivity.this, LoginActivity.class);
+            Intent intent = new Intent(StartActivity.this, LoadingActivity.class);
             startActivity(intent);
             finish();
         } else {
