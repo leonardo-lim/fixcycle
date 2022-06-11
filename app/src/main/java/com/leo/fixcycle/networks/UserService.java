@@ -8,6 +8,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 public interface UserService {
     @POST("login")
@@ -21,4 +22,7 @@ public interface UserService {
 
     @GET("users")
     Call<User> getUser(@Header("Authorization") String accessToken);
+
+    @PUT("users")
+    Call<User> updateUser(@Body User user, @Header("Authorization") String accessToken);
 }
