@@ -6,14 +6,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="10dp"
-    android:layout_marginHorizontal="20dp"
-    android:layout_marginTop="15dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="10dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/dark_navy"
+        android:background="@drawable/dark_navy_rounded_rectangle"
         android:padding="10dp">
 
         <ImageView
@@ -45,7 +46,11 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="Honda"
-            android:padding="8dp"/>
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/red_rounded_rectangle"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="4dp"/>
 
         <TextView
             android:id="@+id/motorcycle_license_plate"
@@ -59,11 +64,13 @@
             android:paddingEnd="10dp"
             android:paddingVertical="10dp"/>
 
-        <Button
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:text="See Details"
-            android:textAllCaps="false"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textColor="@color/dark_navy"
             android:background="@drawable/button_selector"
             android:layout_toEndOf="@id/motorcycle_img"
             android:layout_below="@id/motorcycle_license_plate"/>
