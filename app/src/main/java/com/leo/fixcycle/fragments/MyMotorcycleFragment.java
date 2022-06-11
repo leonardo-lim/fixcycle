@@ -71,14 +71,6 @@ public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.
 
         Motorcycle motor6 = new Motorcycle(R.drawable.logo,1,"Motorola","392838","Kawasaki","Motor mainan","Duamax","Gradien blue ocean","2018-01-01 00:00");
         motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-        motorcycleDataHolder.add(motor6);
-
     }
 
     @Override
