@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,7 +50,8 @@ public class HomeFragment extends Fragment {
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         String name = response.body().getData().getUser().getName();
-                        welcomeText.setText("Hello " + name + "!");
+                        String time = getTime();
+                        welcomeText.setText("Good " + time + ", " + name + "!");
                     } else if (response.code() == 401) {
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
@@ -74,6 +76,24 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+    }
+
+    private String getTime() {
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        String time;
+
+        if (hour >= 6 && hour < 12) {
+            time = "morning";
+        } else if (hour >= 12 && hour < 16) {
+            time = "afternoon";
+        } else if (hour >= 16 && hour < 21) {
+            time = "evening";
+        } else {
+            time = "night";
+        }
+
+        return time;
     }
 
     private void showToast(String message) {
