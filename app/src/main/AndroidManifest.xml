@@ -14,6 +14,7 @@
         android:theme="@style/Theme.Fixcycle">
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.AddMotorcycleActivity" />
+        <activity android:name=".activities.MotorcycleDetailsActivity" />
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.LoadingActivity" />
