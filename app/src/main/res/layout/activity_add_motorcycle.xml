@@ -13,39 +13,15 @@
         android:layout_gravity="center">
 
         <TextView
-            android:id="@+id/motorcycle_data_input_text"
+            android:id="@+id/add_motorcycle_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Motorcycle Data Input"
+            android:text="Add Motorcycle"
             android:textColor="@color/navy"
             android:textSize="28sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/license_plate_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:text="License Plate"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/motorcycle_data_input_text" />
-
-        <EditText
-            android:id="@+id/license_plate_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle license plate"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/license_plate_text" />
 
         <TextView
             android:id="@+id/name_text"
@@ -56,7 +32,7 @@
             android:text="Name"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/license_plate_input" />
+            app:layout_constraintTop_toBottomOf="@+id/add_motorcycle_text" />
 
         <EditText
             android:id="@+id/name_input"
@@ -96,6 +72,30 @@
             app:layout_constraintTop_toBottomOf="@+id/brand_text" />
 
         <TextView
+            android:id="@+id/license_plate_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="20dp"
+            android:text="License Plate"
+            android:textColor="@color/brown"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brand_input" />
+
+        <EditText
+            android:id="@+id/license_plate_input"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+            android:backgroundTint="@color/navy"
+            android:hint="Enter your motorcycle license plate"
+            android:textSize="14sp"
+            android:textColor="@color/navy"
+            android:textColorHint="@color/beige"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/license_plate_text" />
+
+        <TextView
             android:id="@+id/type_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
             android:text="Type"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brand_input" />
+            app:layout_constraintTop_toBottomOf="@+id/license_plate_input" />
 
         <EditText
             android:id="@+id/type_input"
@@ -216,14 +216,14 @@
             app:layout_constraintTop_toBottomOf="@+id/fuel_type_text" />
 
         <Button
-            android:id="@+id/login_btn"
-            android:layout_width="wrap_content"
+            android:id="@+id/add_btn"
+            android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_marginTop="20dp"
             android:paddingHorizontal="15dp"
             android:background="@drawable/blue_rounded_button"
-            android:drawableStart="@drawable/beige_ic_baseline_save_16"
-            android:text="Save"
+            android:drawableStart="@drawable/beige_ic_baseline_library_add_16"
+            android:text="Add"
             android:textSize="14sp"
             android:textColor="@color/beige"
             android:textAllCaps="false"
