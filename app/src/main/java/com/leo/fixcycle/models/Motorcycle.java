@@ -2,9 +2,9 @@ package com.leo.fixcycle.models;
 
 public class Motorcycle {
     int image,cylinderCapacity;
-    String name,licensePlate,brand,type,fuelType,color;
+    String name,licensePlate,brand,type,fuelType,color,date;
 
-    public Motorcycle(int image, int cylinderCapacity, String name, String licensePlate, String brand, String type, String fuelType, String color) {
+    public Motorcycle(int image, int cylinderCapacity, String name, String licensePlate, String brand, String type, String fuelType, String color, String date) {
         this.image = image;
         this.cylinderCapacity = cylinderCapacity;
         this.name = name;
@@ -13,6 +13,7 @@ public class Motorcycle {
         this.type = type;
         this.fuelType = fuelType;
         this.color = color;
+        this.date = date;
     }
 
     public int getImage() {
@@ -77,5 +78,13 @@ public class Motorcycle {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
