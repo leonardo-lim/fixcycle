@@ -1,58 +1,149 @@
 package com.leo.fixcycle.activities;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.leo.fixcycle.R;
+import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
+import com.leo.fixcycle.networks.MotorcycleClient;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MotorcycleDetailsActivity extends AppCompatActivity {
-    MotorcycleDataMotorcycle motorcycleDataMotorcycle;
+    MotorcycleDataMotorcycle motorcycle;
+    int motorcycleId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_motorcycle_details);
 
+        getMotorcycleDetails();
+
+        Button editButton = findViewById(R.id.edit_btn);
+        Button deleteButton = findViewById(R.id.delete_btn);
+
+        editButton.setOnClickListener(view -> openActivity());
+        deleteButton.setOnClickListener(view -> showAlertDialog());
+    }
+
+    private void getMotorcycleDetails() {
         ImageView imageView = findViewById(R.id.motorcycle_details_img);
         TextView nameContent = findViewById(R.id.name_content);
         TextView brandContent = findViewById(R.id.brand_content);
         TextView typeContent = findViewById(R.id.type_content);
-        TextView licenseContent = findViewById(R.id.license_plate_content);
+        TextView licensePlateContent = findViewById(R.id.license_plate_content);
         TextView cylinderCapacityContent = findViewById(R.id.cylinder_capacity_content);
         TextView colorContent = findViewById(R.id.color_content);
         TextView fuelTypeContent = findViewById(R.id.fuel_type_content);
         TextView productionYearContent = findViewById(R.id.production_year_content);
 
-        Intent intent = getIntent();
-        if(intent.getExtras()!=null){
-            motorcycleDataMotorcycle = (MotorcycleDataMotorcycle) intent.getSerializableExtra("data");
+        Bundle extras = getIntent().getExtras();
 
-            String name = motorcycleDataMotorcycle.getName();
-            String brand = motorcycleDataMotorcycle.getBrand();
-            String type = motorcycleDataMotorcycle.getType();
-            double cylinderCapacity = motorcycleDataMotorcycle.getCylinderCapacity();
-            String licensePlate = motorcycleDataMotorcycle.getLicensePlate();
-            String color = motorcycleDataMotorcycle.getColor();
-            String fuelType = motorcycleDataMotorcycle.getFuelType();
-            String productionYear = motorcycleDataMotorcycle.getProductionYear();
-            productionYear = productionYear.substring(0,4);
+        if (extras != null) {
+            motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("data");
+
+            motorcycleId = motorcycle.getId();
+            String name = motorcycle.getName();
+            String brand = motorcycle.getBrand();
+            String licensePlate = motorcycle.getLicensePlate();
+            String type = motorcycle.getType();
+            double cylinderCapacity = motorcycle.getCylinderCapacity();
+            String productionYear = motorcycle.getProductionYear().substring(0, 4);
+            String color = motorcycle.getColor();
+            String fuelType = motorcycle.getFuelType();
 
             imageView.setImageResource(R.drawable.start);
             nameContent.setText(name);
             brandContent.setText(brand);
+            licensePlateContent.setText(licensePlate);
             typeContent.setText(type);
             cylinderCapacityContent.setText(String.valueOf(cylinderCapacity));
-            licenseContent.setText(licensePlate);
+            productionYearContent.setText(productionYear);
             colorContent.setText(color);
             fuelTypeContent.setText(fuelType);
-            productionYearContent.setText(productionYear);
         }
+    }
 
+    private void openActivity() {
+        Intent intent = new Intent(MotorcycleDetailsActivity.this, EditMotorcycleActivity.class);
+        intent.putExtra("motorcycleId", motorcycleId);
+        startActivity(intent);
+    }
+
+    private void showAlertDialog() {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        alertDialogBuilder
+                .setIcon(R.drawable.logo)
+                .setTitle("Delete")
+                .setMessage("Are you sure want to delete this motorcycle?")
+                .setCancelable(false)
+                .setNegativeButton("Cancel", (dialogInterface, i) -> {
+                    dialogInterface.cancel();
+                })
+                .setPositiveButton("Delete", (dialogInterface, i) -> {
+                    deleteMotorcycleData();
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    private void deleteMotorcycleData() {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String accessToken = sp.getString("accessToken", "");
+
+        MotorcycleClient call = new MotorcycleClient();
+
+        call.getApi().removeMotorcycle(motorcycleId, "Bearer " + accessToken).enqueue(new Callback<Motorcycle>() {
+            @Override
+            public void onResponse(Call<Motorcycle> call, Response<Motorcycle> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Intent intent = new Intent(MotorcycleDetailsActivity.this, MainActivity.class);
+                    intent.putExtra("fragmentName", "myMotorcycle");
+                    startActivity(intent);
+                    showToast("Motorcycle deleted successfully");
+                    finish();
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Motorcycle> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void showToast(String message) {
+        Toast.makeText(MotorcycleDetailsActivity.this, message, Toast.LENGTH_LONG).show();
     }
 }
