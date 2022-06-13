@@ -1,9 +1,9 @@
 package com.leo.fixcycle.models;
 
-import com.leo.fixcycle.models.MotorcycleData;
+import java.io.Serializable;
 
-public class Motorcycle {
-    private int imageId;
+public class MotorcycleDataMotorcycle implements Serializable {
+    private int id;
     private String name;
     private String brand;
     private String licensePlate;
@@ -12,14 +12,13 @@ public class Motorcycle {
     private String productionYear;
     private String color;
     private String fuelType;
-    private MotorcycleData data;
 
-    public int getImageId() {
-        return imageId;
+    public int getId() {
+        return id;
     }
 
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -84,13 +83,5 @@ public class Motorcycle {
 
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
-    }
-
-    public MotorcycleData getData() {
-        return data;
-    }
-
-    public void setData(MotorcycleData data) {
-        this.data = data;
     }
 }
