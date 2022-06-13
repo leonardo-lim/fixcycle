@@ -1,9 +1,6 @@
 package com.leo.fixcycle.models;
 
-import com.leo.fixcycle.models.MotorcycleData;
-
 public class Motorcycle {
-    private int imageId;
     private String name;
     private String brand;
     private String licensePlate;
@@ -13,14 +10,6 @@ public class Motorcycle {
     private String color;
     private String fuelType;
     private MotorcycleData data;
-
-    public int getImageId() {
-        return imageId;
-    }
-
-    public void setImageId(int imageId) {
-        this.imageId = imageId;
-    }
 
     public String getName() {
         return name;
