@@ -10,7 +10,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
         <TextView
             android:id="@+id/add_motorcycle_text"
@@ -28,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="Name"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:text="License Plate"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
@@ -120,7 +122,7 @@
             app:layout_constraintTop_toBottomOf="@+id/type_text" />
 
         <TextView
-            android:id="@+id/cyclinder_capacity_text"
+            android:id="@+id/cylinder_capacity_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -131,7 +133,7 @@
             app:layout_constraintTop_toBottomOf="@+id/type_input" />
 
         <EditText
-            android:id="@+id/cyclinder_capacity_input"
+            android:id="@+id/cylinder_capacity_input"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
@@ -141,7 +143,7 @@
             android:textColor="@color/navy"
             android:textColorHint="@color/beige"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cyclinder_capacity_text" />
+            app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_text" />
 
         <TextView
             android:id="@+id/production_year_text"
@@ -152,7 +154,7 @@
             android:text="Production Year"
             android:textColor="@color/brown"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cyclinder_capacity_input" />
+            app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_input" />
 
         <EditText
             android:id="@+id/production_year_input"
