@@ -11,16 +11,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.Motorcycle;
+import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.myviewholder>{
 
-    ArrayList<Motorcycle> motorcyclesDataHolder;
+    List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     OnClickShowListener mOnClickShowListener;
 
-    public MotorcycleAdapter(ArrayList<Motorcycle> motorcyclesDataHolder, OnClickShowListener onClickShowListener) {
+    public MotorcycleAdapter(List<MotorcycleDataMotorcycle> motorcyclesDataHolder, OnClickShowListener onClickShowListener) {
         this.motorcyclesDataHolder = motorcyclesDataHolder;
         this.mOnClickShowListener = onClickShowListener;
     }
@@ -34,10 +36,15 @@ public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.my
 
     @Override
     public void onBindViewHolder(@NonNull MotorcycleAdapter.myviewholder holder, int position) {
-        holder.img.setImageResource(motorcyclesDataHolder.get(position).getImage());
-        holder.name.setText(motorcyclesDataHolder.get(position).getName());
-        holder.brand.setText(motorcyclesDataHolder.get(position).getBrand());
-        holder.licensePlate.setText(motorcyclesDataHolder.get(position).getLicensePlate());
+        MotorcycleDataMotorcycle res = motorcyclesDataHolder.get(position);
+        holder.img.setImageResource(R.drawable.start);
+        holder.name.setText(res.getName());
+        holder.brand.setText(res.getBrand());
+        holder.licensePlate.setText(res.getLicensePlate());
+
+        holder.itemView.setOnClickListener(view -> {
+            mOnClickShowListener.onClickShowListener(res);
+        });
     }
 
     @Override
@@ -45,7 +52,7 @@ public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.my
         return motorcyclesDataHolder.size();
     }
 
-    class myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    class myviewholder extends RecyclerView.ViewHolder{
         ImageView img;
         TextView name,brand,licensePlate;
         OnClickShowListener onClickShowListener;
@@ -55,17 +62,17 @@ public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.my
             name =itemView.findViewById(R.id.motorcycle_name);
             brand= itemView.findViewById(R.id.motorcycle_brand);
             licensePlate=itemView.findViewById(R.id.motorcycle_license_plate);
-            this.onClickShowListener = onClickShowListener;
-            itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            onClickShowListener.onClickShowListener(getAdapterPosition());
-        }
     }
 
     public interface OnClickShowListener{
-        void onClickShowListener(int position);
+        void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle);
     }
+
+    public void setData(List<MotorcycleDataMotorcycle> motorcyclesDataHolder){
+        this.motorcyclesDataHolder = motorcyclesDataHolder;
+        notifyDataSetChanged();
+    }
+
 }
