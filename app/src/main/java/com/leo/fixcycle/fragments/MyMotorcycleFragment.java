@@ -75,14 +75,6 @@ public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.
                         List<MotorcycleDataMotorcycle> motorcyclesDataHolder = response.body().getData().getMotorcycles();
                         motorcycleAdapter.setData(motorcyclesDataHolder);
                         recyclerView.setAdapter(motorcycleAdapter);
-
-                    } else if (response.code() == 401) {
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
-                        startActivity(intent);
-
-                        if (getActivity() != null) {
-                            getActivity().finish();
-                        }
                     } else if (response.errorBody() != null) {
                         try {
                             JSONObject error = new JSONObject(response.errorBody().string());
