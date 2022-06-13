@@ -69,7 +69,7 @@ public class AddMotorcycleActivity extends AppCompatActivity {
         motorcycle.setLicensePlate(licensePlate);
         motorcycle.setType(type);
         motorcycle.setCylinderCapacity(Double.parseDouble(cylinderCapacity));
-        motorcycle.setProductionYear(productionYear + "-01-01");
+        motorcycle.setProductionYear(productionYear + "-02-02");
         motorcycle.setColor(color);
         motorcycle.setFuelType(fuelType);
 
