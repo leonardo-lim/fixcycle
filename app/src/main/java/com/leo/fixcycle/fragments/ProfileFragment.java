@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -42,7 +43,7 @@ public class ProfileFragment extends Fragment {
         Button logoutButton = view.findViewById(R.id.logout_btn);
 
         editProfileButton.setOnClickListener(v -> openActivity());
-        logoutButton.setOnClickListener(v -> logout(view));
+        logoutButton.setOnClickListener(v -> showAlertDialog(view));
 
         return view;
     }
@@ -100,6 +101,27 @@ public class ProfileFragment extends Fragment {
     private void openActivity() {
         Intent intent = new Intent(getActivity(), EditProfileActivity.class);
         startActivity(intent);
+    }
+
+    private void showAlertDialog(View view) {
+        if (getActivity() != null) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+            alertDialogBuilder
+                    .setIcon(R.drawable.logo)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure want to logout this user?")
+                    .setCancelable(false)
+                    .setNegativeButton("Cancel", (dialogInterface, i) -> {
+                        dialogInterface.cancel();
+                    })
+                    .setPositiveButton("Logout", (dialogInterface, i) -> {
+                        logout(view);
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
     }
 
     private void logout(View view) {
