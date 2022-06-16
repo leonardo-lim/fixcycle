@@ -190,6 +190,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
+            <CheckBox
+                android:id="@+id/pickUpCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Pickup and Drop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                android:buttonTint="@color/brown"
+                app:layout_constraintTop_toBottomOf="@+id/service_time_btn"/>
+
             <Button
                 android:id="@+id/book_service_btn"
                 android:layout_width="wrap_content"
@@ -204,7 +215,7 @@
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/service_time_btn" />
+                app:layout_constraintTop_toBottomOf="@+id/pickUpCheckBox" />
 
             <ProgressBar
                 android:id="@+id/loading"
