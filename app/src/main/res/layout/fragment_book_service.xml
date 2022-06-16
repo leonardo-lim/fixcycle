@@ -191,7 +191,7 @@
                 />
 
             <Button
-                android:id="@+id/register_btn"
+                android:id="@+id/book_service_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginTop="20dp"
