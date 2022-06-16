@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
+
 import android.os.Bundle;
-import android.util.Log;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.leo.fixcycle.R;
@@ -17,9 +17,11 @@ import com.leo.fixcycle.fragments.HomeFragment;
 import com.leo.fixcycle.fragments.MyMotorcycleFragment;
 import com.leo.fixcycle.fragments.OrdersFragment;
 import com.leo.fixcycle.fragments.ProfileFragment;
+import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    MotorcycleDataMotorcycle motorcycle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         String fragmentName = "home";
+        String chooseMotorcycleName="";
+        int chooseMotorcycleId;
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             fragmentName = extras.getString("fragmentName");
+            motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("data");
+
+            chooseMotorcycleId = motorcycle.getId();
+            chooseMotorcycleName = motorcycle.getName();
         }
 
         switch (fragmentName) {
@@ -45,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 bottomNavigationView.setSelectedItemId(R.id.orders_nav);
                 break;
             case "bookService":
-                replaceFragment(new BookServiceFragment());
+                BookServiceFragment bookServiceFragment = new BookServiceFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                Bundle data = extras;
+                bookServiceFragment.setArguments(data);
+                fragmentTransaction.replace(R.id.fragment_container, bookServiceFragment).commit();
+
                 bottomNavigationView.setSelectedItemId(R.id.book_service_nav);
                 break;
             case "myMotorcycle":
