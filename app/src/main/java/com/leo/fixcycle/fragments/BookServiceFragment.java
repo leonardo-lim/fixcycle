@@ -179,12 +179,6 @@ public class BookServiceFragment extends Fragment {
             service.setServiceTime(serviceTimeFormat);
             service.setServiceStatus(1);
 
-            Log.d("TAG",name);
-            Log.d("TAG","radio: "+String.valueOf(service.getType()));
-            Log.d("TAG",String.valueOf(service.getRequest()));
-            Log.d("TAG",serviceDate);
-            Log.d("TAG",serviceTime);
-            Log.d("TAG",serviceDate+" "+serviceTime);
             ServiceClient call = new ServiceClient();
 
 //            loading.setVisibility(View.VISIBLE);
@@ -193,11 +187,10 @@ public class BookServiceFragment extends Fragment {
                 @Override
                 public void onResponse(Call<Service> call, Response<Service> response) {
                     if (response.isSuccessful() && response.body() != null) {
-//                        Intent intent = new Intent(getActivity(), MainActivity.class);
-//                        intent.putExtra("fragmentName", "myMotorcycle");
-//                        startActivity(intent);
-                        showToast("Booking service successfully");
-//                        finish();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        intent.putExtra("fragmentName", "orders");
+                        startActivity(intent);
+                        showToast("Service booked successfully");
                     } else if (response.errorBody() != null) {
                         try {
                             JSONObject error = new JSONObject(response.errorBody().string());
