@@ -31,16 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.nav_view);
         String fragmentName = "home";
-        String chooseMotorcycleName="";
-        int chooseMotorcycleId;
+
         Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
             fragmentName = extras.getString("fragmentName");
             motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("data");
 
-            chooseMotorcycleId = motorcycle.getId();
-            chooseMotorcycleName = motorcycle.getName();
         }
 
         switch (fragmentName) {
