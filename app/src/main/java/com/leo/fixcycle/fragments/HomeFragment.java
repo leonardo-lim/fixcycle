@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
+import com.leo.fixcycle.activities.AdminOrdersActivity;
 import com.leo.fixcycle.activities.LoginActivity;
 import com.leo.fixcycle.models.User;
+import com.leo.fixcycle.models.UserDataUser;
 import com.leo.fixcycle.networks.UserClient;
 
 import org.json.JSONException;
@@ -49,9 +51,21 @@ public class HomeFragment extends Fragment {
                 @Override
                 public void onResponse(Call<User> call, Response<User> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        String name = response.body().getData().getUser().getName();
-                        String time = getTime();
-                        welcomeText.setText("Good " + time + ", " + name + "!");
+                        UserDataUser user = response.body().getData().getUser();
+                        String name = user.getName();
+                        boolean isAdmin = user.getIsAdmin();
+
+                        if (isAdmin) {
+                            Intent intent = new Intent(getActivity(), AdminOrdersActivity.class);
+                            startActivity(intent);
+
+                            if (getActivity() != null) {
+                                getActivity().finish();
+                            }
+                        } else {
+                            String time = getTime();
+                            welcomeText.setText("Good " + time + ", " + name + "!");
+                        }
                     } else if (response.code() == 401) {
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
                         startActivity(intent);
