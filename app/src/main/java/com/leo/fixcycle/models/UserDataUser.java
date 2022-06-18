@@ -5,6 +5,7 @@ public class UserDataUser {
     private String email;
     private String address;
     private String phoneNumber;
+    private boolean isAdmin;
 
     public String getName() {
         return name;
@@ -22,6 +23,10 @@ public class UserDataUser {
         return phoneNumber;
     }
 
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -36,5 +41,9 @@ public class UserDataUser {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }
