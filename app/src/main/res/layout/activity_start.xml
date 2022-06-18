@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:paddingHorizontal="15dp"
-            android:background="@drawable/gold_rounded_button"
+            android:background="@drawable/beige_gold_rounded_button"
             android:drawableEnd="@drawable/navy_ic_baseline_arrow_forward_24"
             android:text="Get Started "
             android:textSize="18sp"
