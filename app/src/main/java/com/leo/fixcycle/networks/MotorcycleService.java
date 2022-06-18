@@ -12,6 +12,9 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface MotorcycleService {
+    @GET("motorcycles")
+    Call<Motorcycle> getMotorcycles(@Header("Authorization") String accessToken);
+
     @GET("motorcycles/user")
     Call<Motorcycle> getMotorcycle(@Header("Authorization") String accessToken);
 
