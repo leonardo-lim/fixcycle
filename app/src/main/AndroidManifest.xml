@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fixcycle"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.ChooseMotorcycleActivity"></activity>
+        <activity android:name=".activities.AdminOrdersActivity" />
+        <activity android:name=".activities.ChooseMotorcycleActivity" />
         <activity android:name=".activities.EditProfileActivity" />
         <activity android:name=".activities.EditMotorcycleActivity" />
         <activity android:name=".activities.AddMotorcycleActivity" />
