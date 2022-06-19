@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -127,13 +128,34 @@ public class BookServiceFragment extends Fragment {
         bookServicebtn.setOnClickListener(v->{
             if(data!=null){
                 int motorcycleId = motorcycle.getId();
-                bookService(view,motorcycleId);
+                showAlertDialog(view,motorcycleId);
             }else{
                 showToast("Please complete the input");
             }
         });
 
         return view;
+    }
+
+    private void showAlertDialog(View view, int motorcycleId) {
+        if (getActivity() != null) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+            alertDialogBuilder
+                    .setIcon(R.drawable.logo)
+                    .setTitle("Book Service")
+                    .setMessage("Are you sure want to book this service?")
+                    .setCancelable(false)
+                    .setNegativeButton("Cancel", (dialogInterface, i) -> {
+                        dialogInterface.cancel();
+                    })
+                    .setPositiveButton("Book", (dialogInterface, i) -> {
+                        bookService(view, motorcycleId);
+                    });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+        }
     }
 
     private void bookService(View view,int motorcycleId) {
