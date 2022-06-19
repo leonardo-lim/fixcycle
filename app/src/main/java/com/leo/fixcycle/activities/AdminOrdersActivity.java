@@ -60,7 +60,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         getService();
 
         Button logoutButton = findViewById(R.id.logout_btn);
-        logoutButton.setOnClickListener(view -> showAlertDialog());
+        logoutButton.setOnClickListener(view -> showAlertDialog("logout this user", "Logout", 0));
     }
 
     private void getService() {
@@ -207,19 +207,32 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         });
     }
 
-    private void showAlertDialog() {
+    private void showAlertDialog(String message, String actionName, int serviceId) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AdminOrdersActivity.this);
 
         alertDialogBuilder
                 .setIcon(R.drawable.logo)
-                .setTitle("Logout")
-                .setMessage("Are you sure want to logout this user?")
+                .setTitle(actionName)
+                .setMessage("Are you sure want to " + message + "?")
                 .setCancelable(false)
                 .setNegativeButton("Cancel", (dialogInterface, i) -> {
                     dialogInterface.cancel();
                 })
-                .setPositiveButton("Logout", (dialogInterface, i) -> {
-                    logout();
+                .setPositiveButton(actionName, (dialogInterface, i) -> {
+                    switch (actionName) {
+                        case "Logout":
+                            logout();
+                            break;
+                        case "Reject":
+                            updateServiceData(serviceId, 4);
+                            break;
+                        case "Accept":
+                            updateServiceData(serviceId, 2);
+                            break;
+                        default:
+                            updateServiceData(serviceId, 3);
+                            break;
+                    }
                 });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
@@ -263,17 +276,17 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
 
     @Override
     public void onRejectButtonClick(int incomingServiceId) {
-        updateServiceData(incomingServiceId, 4);
+        showAlertDialog("reject this service", "Reject", incomingServiceId);
     }
 
     @Override
     public void onAcceptButtonClick(int incomingServiceId) {
-        updateServiceData(incomingServiceId, 2);
+        showAlertDialog("accept this service", "Accept", incomingServiceId);
     }
 
     @Override
     public void onFinishServiceButtonClick(int onProcessServiceId) {
-        updateServiceData(onProcessServiceId, 3);
+        showAlertDialog("finish this service", "Finish", onProcessServiceId);
     }
 
     @Override
