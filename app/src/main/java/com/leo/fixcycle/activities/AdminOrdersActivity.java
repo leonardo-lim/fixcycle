@@ -45,7 +45,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     List<ServiceDataService> servicesDataHolder;
     List<ServiceDataService> incomingServicesDataHolder = new ArrayList<>();
-    List<ServiceDataService> onProcessServiceDataHolder = new ArrayList<>();
+    List<ServiceDataService> onProcessServicesDataHolder = new ArrayList<>();
     List<Integer> incomingStatus = new ArrayList<>();
     List<Integer> onProcessStatus = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                             incomingServicesDataHolder.add(service);
                         } else if (serviceStatus == 2) {
                             onProcessStatus.add(motorcycleId);
-                            onProcessServiceDataHolder.add(service);
+                            onProcessServicesDataHolder.add(service);
                         }
                     }
 
@@ -161,7 +161,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         incomingRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         incomingRecyclerView.setAdapter(incomingMotorcycleAdapter);
 
-        onProcessMotorcycleAdapter = new OnProcessOrdersAdapter(onProcessServicedMotorcyclesDataHolder, incomingServicesDataHolder, this);
+        onProcessMotorcycleAdapter = new OnProcessOrdersAdapter(onProcessServicedMotorcyclesDataHolder, onProcessServicesDataHolder, this);
         onProcessRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         onProcessRecyclerView.setAdapter(onProcessMotorcycleAdapter);
     }
