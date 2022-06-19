@@ -1,6 +1,8 @@
 package com.leo.fixcycle.models;
 
-public class ServiceDataService {
+import java.io.Serializable;
+
+public class ServiceDataService implements Serializable {
     private int id;
     private int motorcycleId;
     private int type;
