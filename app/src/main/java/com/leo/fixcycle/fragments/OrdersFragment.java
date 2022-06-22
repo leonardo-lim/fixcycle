@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
-import com.leo.fixcycle.activities.MotorcycleDetailsActivity;
-import com.leo.fixcycle.adapters.MotorcycleAdapter;
+import com.leo.fixcycle.activities.ServiceDetailsActivity;
+import com.leo.fixcycle.adapters.UserOrdersAdapter;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 import com.leo.fixcycle.models.Service;
@@ -35,18 +35,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrdersFragment extends Fragment implements MotorcycleAdapter.OnClickShowListener {
+public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClickOrdersListener {
     RecyclerView pendingRecyclerView;
     RecyclerView ongoingRecyclerView;
     RecyclerView finishedRecyclerView;
     RecyclerView canceledRecyclerView;
 
-    MotorcycleAdapter pendingMotorcycleAdapter;
-    MotorcycleAdapter ongoingMotorcycleAdapter;
-    MotorcycleAdapter finishedMotorcycleAdapter;
-    MotorcycleAdapter canceledMotorcycleAdapter;
+    UserOrdersAdapter pendingMotorcycleAdapter;
+    UserOrdersAdapter ongoingMotorcycleAdapter;
+    UserOrdersAdapter finishedMotorcycleAdapter;
+    UserOrdersAdapter canceledMotorcycleAdapter;
 
+    List<ServiceDataService> servicesDataHolder;
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
+    List<ServiceDataService> pendingOrderDataHolder = new ArrayList<>();
+    List<ServiceDataService> ongoingOrderDataHolder = new ArrayList<>();
+    List<ServiceDataService> finishedOrderDataHolder = new ArrayList<>();
+    List<ServiceDataService> canceledOrderDataHolder = new ArrayList<>();
     List<Integer> pendingStatus = new ArrayList<>();
     List<Integer> ongoingStatus = new ArrayList<>();
     List<Integer> finishedStatus = new ArrayList<>();
@@ -66,11 +71,10 @@ public class OrdersFragment extends Fragment implements MotorcycleAdapter.OnClic
         finishedRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         canceledRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        pendingMotorcycleAdapter = new MotorcycleAdapter(motorcyclesDataHolder, this);
-        ongoingMotorcycleAdapter = new MotorcycleAdapter(motorcyclesDataHolder, this);
-        finishedMotorcycleAdapter = new MotorcycleAdapter(motorcyclesDataHolder, this);
-        canceledMotorcycleAdapter = new MotorcycleAdapter(motorcyclesDataHolder, this);
-
+        pendingMotorcycleAdapter = new UserOrdersAdapter(motorcyclesDataHolder, servicesDataHolder,this);
+        ongoingMotorcycleAdapter = new UserOrdersAdapter(motorcyclesDataHolder, servicesDataHolder,this);
+        finishedMotorcycleAdapter = new UserOrdersAdapter(motorcyclesDataHolder, servicesDataHolder,this);
+        canceledMotorcycleAdapter = new UserOrdersAdapter(motorcyclesDataHolder, servicesDataHolder,this);
         getService();
 
         return view;
@@ -88,6 +92,7 @@ public class OrdersFragment extends Fragment implements MotorcycleAdapter.OnClic
                 public void onResponse(Call<Service> call, Response<Service> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         List<ServiceDataService> services = response.body().getData().getServices();
+                        servicesDataHolder = services;
 
                         for (ServiceDataService service : services) {
                             int serviceStatus = service.getServiceStatus();
@@ -95,12 +100,16 @@ public class OrdersFragment extends Fragment implements MotorcycleAdapter.OnClic
 
                             if (serviceStatus == 1) {
                                 pendingStatus.add(motorcycleId);
+                                pendingOrderDataHolder.add(service);
                             } else if (serviceStatus == 2) {
                                 ongoingStatus.add(motorcycleId);
+                                ongoingOrderDataHolder.add(service);
                             } else if (serviceStatus == 3) {
                                 finishedStatus.add(motorcycleId);
+                                finishedOrderDataHolder.add(service);
                             } else {
                                 canceledStatus.add(motorcycleId);
+                                canceledOrderDataHolder.add(service);
                             }
                         }
 
@@ -194,20 +203,21 @@ public class OrdersFragment extends Fragment implements MotorcycleAdapter.OnClic
             }
         }
 
-        pendingMotorcycleAdapter.setData(pendingServicedMotorcyclesDataHolder);
+        pendingMotorcycleAdapter.setData(pendingServicedMotorcyclesDataHolder,pendingOrderDataHolder);
         pendingRecyclerView.setAdapter(pendingMotorcycleAdapter);
-        ongoingMotorcycleAdapter.setData(ongoingServicedMotorcyclesDataHolder);
+        ongoingMotorcycleAdapter.setData(ongoingServicedMotorcyclesDataHolder,ongoingOrderDataHolder);
         ongoingRecyclerView.setAdapter(ongoingMotorcycleAdapter);
-        finishedMotorcycleAdapter.setData(finishedServicedMotorcyclesDataHolder);
+        finishedMotorcycleAdapter.setData(finishedServicedMotorcyclesDataHolder,finishedOrderDataHolder);
         finishedRecyclerView.setAdapter(finishedMotorcycleAdapter);
-        canceledMotorcycleAdapter.setData(canceledServicedMotorcyclesDataHolder);
+        canceledMotorcycleAdapter.setData(canceledServicedMotorcyclesDataHolder,canceledOrderDataHolder);
         canceledRecyclerView.setAdapter(canceledMotorcycleAdapter);
     }
 
     @Override
-    public void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle) {
-        Intent intent =  new Intent(getActivity(), MotorcycleDetailsActivity.class);
-        intent.putExtra("data", motorcycleDataMotorcycle);
+    public void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle,ServiceDataService serviceDataService) {
+        Intent intent =  new Intent(getActivity(), ServiceDetailsActivity.class);
+        intent.putExtra("motorcycleData", motorcycleDataMotorcycle);
+        intent.putExtra("serviceData",serviceDataService);
         startActivity(intent);
     }
 
