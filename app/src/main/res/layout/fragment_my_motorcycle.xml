@@ -28,23 +28,22 @@
                     android:id="@+id/mymoto_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="25dp"
+                    android:layout_marginVertical="30dp"
                     android:text="My Motorcycle"
                     android:textColor="@color/navy"
                     android:textSize="28sp"
-                    app:layout_constraintTop_toBottomOf="@id/mymoto_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
                     android:id="@+id/add_motorcycle_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="35dp"
                     android:layout_marginVertical="20dp"
-                    android:paddingHorizontal="15dp"
                     android:background="@drawable/blue_rounded_button"
                     android:drawableStart="@drawable/beige_ic_baseline_library_add_16"
+                    android:paddingHorizontal="15dp"
                     android:text=" Add Motorcycle"
                     android:textSize="14sp"
                     android:textColor="@color/beige"
@@ -52,6 +51,38 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mymoto_text" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/no_motorcycle_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/add_motorcycle_btn">
+
+                    <ImageView
+                        android:id="@+id/motorcycle_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/start"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/message_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Looks like you haven't added any motorcycles yet"
+                        android:textColor="@color/navy"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/motorcycle_img" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
