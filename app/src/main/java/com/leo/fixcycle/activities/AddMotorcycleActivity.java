@@ -72,6 +72,7 @@ public class AddMotorcycleActivity extends AppCompatActivity {
         motorcycle.setProductionYear(productionYear + "-02-02");
         motorcycle.setColor(color);
         motorcycle.setFuelType(fuelType);
+        motorcycle.setDeleted(false);
 
         MotorcycleClient call = new MotorcycleClient();
         loading.setVisibility(View.VISIBLE);
