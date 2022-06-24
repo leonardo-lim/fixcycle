@@ -73,6 +73,7 @@ public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.
                 public void onResponse(Call<Motorcycle> call, Response<Motorcycle> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         List<MotorcycleDataMotorcycle> motorcyclesDataHolder = response.body().getData().getMotorcycles();
+                        motorcyclesDataHolder.removeIf(MotorcycleDataMotorcycle::isDeleted);
 
                         if (motorcyclesDataHolder.size() > 0) {
                             ConstraintLayout noMotorcycleLayout = view.findViewById(R.id.no_motorcycle_message);

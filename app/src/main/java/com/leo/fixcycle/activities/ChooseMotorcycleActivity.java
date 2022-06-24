@@ -56,6 +56,8 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Motor
             public void onResponse(Call<Motorcycle> call, Response<Motorcycle> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<MotorcycleDataMotorcycle> motorcyclesDataHolder = response.body().getData().getMotorcycles();
+                    motorcyclesDataHolder.removeIf(MotorcycleDataMotorcycle::isDeleted);
+
                     motorcycleAdapter.setData(motorcyclesDataHolder);
                     recyclerView.setAdapter(motorcycleAdapter);
                 } else if (response.errorBody() != null) {
