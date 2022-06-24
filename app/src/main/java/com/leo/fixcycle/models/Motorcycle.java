@@ -9,6 +9,7 @@ public class Motorcycle {
     private String productionYear;
     private String color;
     private String fuelType;
+    private boolean isDeleted;
     private MotorcycleData data;
 
     public String getName() {
@@ -73,6 +74,14 @@ public class Motorcycle {
 
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public MotorcycleData getData() {

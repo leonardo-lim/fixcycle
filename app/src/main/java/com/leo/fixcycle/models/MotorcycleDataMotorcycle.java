@@ -12,6 +12,7 @@ public class MotorcycleDataMotorcycle implements Serializable {
     private String productionYear;
     private String color;
     private String fuelType;
+    private boolean isDeleted;
 
     public int getId() {
         return id;
@@ -83,5 +84,13 @@ public class MotorcycleDataMotorcycle implements Serializable {
 
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 }
