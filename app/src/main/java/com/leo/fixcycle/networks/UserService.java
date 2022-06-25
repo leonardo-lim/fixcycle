@@ -25,4 +25,7 @@ public interface UserService {
 
     @PUT("users")
     Call<User> updateUser(@Body User user, @Header("Authorization") String accessToken);
+
+    @PUT("users/balance")
+    Call<User> updateBalance(@Body User user, @Header("Authorization") String accessToken);
 }
