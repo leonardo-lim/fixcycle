@@ -1,9 +1,11 @@
 package com.leo.fixcycle.networks;
 
+import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.Service;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -22,4 +24,7 @@ public interface ServiceService {
 
     @PUT("services/{id}")
     Call<Service> updateService(@Path("id") int serviceId, @Body Service service, @Header("Authorization") String accessToken);
+
+    @DELETE("services/{id}")
+    Call<Motorcycle> removeService(@Path("id") int serviceId, @Header("Authorization") String accessToken);
 }
