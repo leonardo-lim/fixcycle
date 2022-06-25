@@ -10,12 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
 import com.leo.fixcycle.activities.AdminOrdersActivity;
 import com.leo.fixcycle.activities.LoginActivity;
+import com.leo.fixcycle.activities.TopUpActivity;
 import com.leo.fixcycle.models.User;
 import com.leo.fixcycle.models.UserDataUser;
 import com.leo.fixcycle.networks.UserClient;
@@ -24,7 +26,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +40,16 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         getUserData(view);
+
+        ImageButton topUpButton = view.findViewById(R.id.top_up_btn);
+        topUpButton.setOnClickListener(v -> openActivity());
+
         return view;
+    }
+
+    private void openActivity() {
+        Intent intent = new Intent(getActivity(), TopUpActivity.class);
+        startActivity(intent);
     }
 
     private void getUserData(View view) {
@@ -45,6 +58,8 @@ public class HomeFragment extends Fragment {
             String accessToken = sp.getString("accessToken", "");
 
             TextView welcomeText = view.findViewById(R.id.welcome_text);
+            TextView balanceText = view.findViewById(R.id.balance_text);
+
             UserClient call = new UserClient();
 
             call.getApi().getUser("Bearer " + accessToken).enqueue(new Callback<User>() {
@@ -53,7 +68,9 @@ public class HomeFragment extends Fragment {
                     if (response.isSuccessful() && response.body() != null) {
                         UserDataUser user = response.body().getData().getUser();
                         String name = user.getName();
-                        boolean isAdmin = user.getIsAdmin();
+                        int balance = user.getBalance();
+                        boolean isAdmin = user.isAdmin();
+                        String time = getTime();
 
                         if (isAdmin) {
                             Intent intent = new Intent(getActivity(), AdminOrdersActivity.class);
@@ -63,8 +80,9 @@ public class HomeFragment extends Fragment {
                                 getActivity().finish();
                             }
                         } else {
-                            String time = getTime();
+                            String formattedBalance = NumberFormat.getCurrencyInstance(new Locale("in", "ID")).format(balance);
                             welcomeText.setText("Good " + time + ", " + name + "!");
+                            balanceText.setText(formattedBalance);
                         }
                     } else if (response.code() == 401) {
                         Intent intent = new Intent(getActivity(), LoginActivity.class);
