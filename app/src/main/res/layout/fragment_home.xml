@@ -11,7 +11,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
@@ -20,7 +20,6 @@
                 android:layout_height="150dp"
                 android:layout_margin="20dp"
                 app:cardCornerRadius="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -50,6 +49,53 @@
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fipay_card"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcome_card">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="20dp"
+                    android:background="@drawable/teal_dark_navy_rounded_rectangle">
+
+                    <TextView
+                        android:id="@+id/fipay_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Fipay"
+                        android:textSize="24sp"
+                        android:textColor="@color/white"
+                        android:drawableStart="@drawable/white_ic_baseline_payment_24" />
+
+                    <TextView
+                        android:id="@+id/balance_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text=""
+                        android:textSize="20sp"
+                        android:textColor="@color/gold"
+                        android:textStyle="bold"
+                        android:layout_below="@id/fipay_text" />
+
+                    <ImageButton
+                        android:id="@+id/top_up_btn"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/teal_rounded_rectangle"
+                        android:src="@drawable/white_ic_baseline_add_36"
+                        android:layout_alignParentEnd="true" />
 
                 </RelativeLayout>
 
