@@ -8,12 +8,12 @@ public class UserData {
         return accessToken;
     }
 
-    public UserDataUser getUser() {
-        return user;
-    }
-
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public UserDataUser getUser() {
+        return user;
     }
 
     public void setUser(UserDataUser user) {
