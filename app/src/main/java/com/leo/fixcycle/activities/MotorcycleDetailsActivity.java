@@ -1,7 +1,6 @@
 package com.leo.fixcycle.activities;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,13 +23,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MotorcycleDetailsActivity extends AppCompatActivity {
+    Button editButton, deleteButton;
     MotorcycleDataMotorcycle motorcycle;
     int motorcycleId;
 
@@ -38,13 +38,13 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_motorcycle_details);
 
-        getMotorcycleDetails();
-
-        Button editButton = findViewById(R.id.edit_btn);
-        Button deleteButton = findViewById(R.id.delete_btn);
+        editButton = findViewById(R.id.edit_btn);
+        deleteButton = findViewById(R.id.delete_btn);
 
         editButton.setOnClickListener(view -> openActivity());
         deleteButton.setOnClickListener(view -> showAlertDialog());
+
+        getMotorcycleDetails();
     }
 
     private void getMotorcycleDetails() {
@@ -72,6 +72,7 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
             String productionYear = motorcycle.getProductionYear().substring(0, 4);
             String color = motorcycle.getColor();
             String fuelType = motorcycle.getFuelType();
+            boolean isDeleted = motorcycle.isDeleted();
 
             imageView.setImageResource(R.drawable.start);
             nameContent.setText(name);
@@ -82,6 +83,11 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
             productionYearContent.setText(productionYear);
             colorContent.setText(color);
             fuelTypeContent.setText(fuelType);
+
+            if (isDeleted) {
+                editButton.setVisibility(View.GONE);
+                deleteButton.setVisibility(View.GONE);
+            }
         }
     }
 
