@@ -17,7 +17,10 @@ import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 import com.leo.fixcycle.models.ServiceDataService;
+import com.leo.fixcycle.models.User;
+import com.leo.fixcycle.models.UserDataUser;
 import com.leo.fixcycle.networks.ServiceClient;
+import com.leo.fixcycle.networks.UserClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +37,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     Bundle extras;
     Button seeMotorcycleDetailsButton, cancelServiceButton;
     int serviceId;
+    boolean isAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,38 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         seeMotorcycleDetailsButton.setOnClickListener(view -> openActivity());
         cancelServiceButton.setOnClickListener(view -> showAlertDialog());
 
-        getServiceDetails();
+        checkIsAdmin();
+    }
+
+    private void checkIsAdmin() {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String accessToken = sp.getString("accessToken", "");
+
+        UserClient call = new UserClient();
+
+        call.getApi().getUser("Bearer " + accessToken).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserDataUser user = response.body().getData().getUser();
+                    isAdmin = user.isAdmin();
+                    getServiceDetails();
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     public void getServiceDetails(){
@@ -76,7 +111,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                 status="Canceled";
             }
 
-            if (stat != 1) {
+            if (stat != 1 || isAdmin) {
                 cancelServiceButton.setVisibility(View.GONE);
             }
 
