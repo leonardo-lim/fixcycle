@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fixcycle"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.InvoiceDetailsActivity" />
         <activity android:name=".activities.TopUpActivity" />
         <activity android:name=".activities.ServiceDetailsActivity" />
         <activity android:name=".activities.AdminOrdersActivity" />
