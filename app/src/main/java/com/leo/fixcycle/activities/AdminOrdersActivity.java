@@ -15,11 +15,13 @@ import android.widget.Toast;
 import com.leo.fixcycle.R;
 import com.leo.fixcycle.adapters.IncomingOrdersAdapter;
 import com.leo.fixcycle.adapters.OnProcessOrdersAdapter;
+import com.leo.fixcycle.models.Invoice;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 import com.leo.fixcycle.models.Service;
 import com.leo.fixcycle.models.ServiceDataService;
 import com.leo.fixcycle.models.User;
+import com.leo.fixcycle.networks.InvoiceClient;
 import com.leo.fixcycle.networks.MotorcycleClient;
 import com.leo.fixcycle.networks.ServiceClient;
 import com.leo.fixcycle.networks.UserClient;
@@ -185,7 +187,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                     if (serviceStatus == 2) {
                         showToast("Order accepted successfully");
                     } else if (serviceStatus == 3) {
-                        showToast("Service finished successfully");
+                        addInvoice(serviceId);
                     } else {
                         showToast("Order rejected successfully");
                     }
@@ -202,6 +204,35 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
 
             @Override
             public void onFailure(Call<Service> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
+    }
+
+    private void addInvoice(int serviceId) {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String accessToken = sp.getString("accessToken", "");
+
+        InvoiceClient call = new InvoiceClient();
+
+        call.getApi().saveInvoice(serviceId, "Bearer " + accessToken).enqueue(new Callback<Invoice>() {
+            @Override
+            public void onResponse(Call<Invoice> call, Response<Invoice> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    showToast("Service finished successfully");
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Invoice> call, Throwable t) {
                 t.printStackTrace();
             }
         });
