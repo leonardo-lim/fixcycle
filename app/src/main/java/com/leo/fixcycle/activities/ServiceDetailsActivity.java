@@ -35,7 +35,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
     MotorcycleDataMotorcycle motorcycle;
     ServiceDataService service;
     Bundle extras;
-    Button seeMotorcycleDetailsButton, cancelServiceButton;
+    Button seeMotorcycleDetailsButton, seeInvoiceDetailsButton, cancelServiceButton;
     int serviceId;
     boolean isAdmin;
 
@@ -45,9 +45,11 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_service_details);
 
         seeMotorcycleDetailsButton = findViewById(R.id.see_motorcycle_details_btn);
+        seeInvoiceDetailsButton = findViewById(R.id.see_invoice_details_btn);
         cancelServiceButton = findViewById(R.id.cancel_service_btn);
 
-        seeMotorcycleDetailsButton.setOnClickListener(view -> openActivity());
+        seeMotorcycleDetailsButton.setOnClickListener(view -> openMotorcycleDetailsActivity());
+        seeInvoiceDetailsButton.setOnClickListener(view -> openInvoiceDetailsActivity());
         cancelServiceButton.setOnClickListener(view -> showAlertDialog());
 
         checkIsAdmin();
@@ -111,6 +113,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                 status="Canceled";
             }
 
+            if (stat != 3 || isAdmin) {
+                seeInvoiceDetailsButton.setVisibility(View.GONE);
+            }
+
             if (stat != 1 || isAdmin) {
                 cancelServiceButton.setVisibility(View.GONE);
             }
@@ -136,10 +142,16 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void openActivity() {
+    private void openMotorcycleDetailsActivity() {
         motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("motorcycleData");
         Intent intent = new Intent(ServiceDetailsActivity.this, MotorcycleDetailsActivity.class);
         intent.putExtra("data", motorcycle);
+        startActivity(intent);
+    }
+
+    private void openInvoiceDetailsActivity() {
+        Intent intent = new Intent(ServiceDetailsActivity.this, InvoiceDetailsActivity.class);
+        intent.putExtra("serviceId", serviceId);
         startActivity(intent);
     }
 
