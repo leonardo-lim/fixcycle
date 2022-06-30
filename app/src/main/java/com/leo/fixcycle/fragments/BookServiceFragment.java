@@ -170,6 +170,7 @@ public class BookServiceFragment extends Fragment {
             TextInputEditText serviceRequest = view.findViewById(R.id.service_request);
             Button serviceDateBtn = view.findViewById(R.id.service_date_btn);
             Button serviceTimeBtn = view.findViewById(R.id.service_time_btn);
+            CheckBox pickUpAndDropCheckBox = view.findViewById(R.id.pick_up_and_drop_check_box);
 
 //            ProgressBar loading = findViewById(R.id.loading);
 
@@ -200,6 +201,7 @@ public class BookServiceFragment extends Fragment {
             service.setType(serviceRadioChecked);
             service.setRequest(serviceReq);
             service.setServiceTime(serviceTimeFormat);
+            service.setPickUpAndDrop(pickUpAndDropCheckBox.isChecked());
             service.setServiceStatus(1);
 
             ServiceClient call = new ServiceClient();
