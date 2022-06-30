@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
-import com.leo.fixcycle.adapters.MotorcycleAdapter;
+import com.leo.fixcycle.adapters.ChooseMotorcycleAdapter;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 import com.leo.fixcycle.networks.MotorcycleClient;
@@ -27,10 +27,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ChooseMotorcycleActivity extends AppCompatActivity implements MotorcycleAdapter.OnClickShowListener {
+public class ChooseMotorcycleActivity extends AppCompatActivity implements ChooseMotorcycleAdapter.OnClickShowListener {
     RecyclerView recyclerView;
     List<MotorcycleDataMotorcycle> motorcycleDataHolder;
-    MotorcycleAdapter motorcycleAdapter;
+    ChooseMotorcycleAdapter chooseMotorcycleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Motor
 
         recyclerView = findViewById(R.id.choose_moto_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        motorcycleAdapter= new MotorcycleAdapter(motorcycleDataHolder,this);
+        chooseMotorcycleAdapter= new ChooseMotorcycleAdapter(motorcycleDataHolder,this);
         getMotorcycle();
 
 
@@ -58,8 +58,8 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Motor
                     List<MotorcycleDataMotorcycle> motorcyclesDataHolder = response.body().getData().getMotorcycles();
                     motorcyclesDataHolder.removeIf(MotorcycleDataMotorcycle::isDeleted);
 
-                    motorcycleAdapter.setData(motorcyclesDataHolder);
-                    recyclerView.setAdapter(motorcycleAdapter);
+                    chooseMotorcycleAdapter.setData(motorcyclesDataHolder);
+                    recyclerView.setAdapter(chooseMotorcycleAdapter);
                 } else if (response.errorBody() != null) {
                     try {
                         JSONObject error = new JSONObject(response.errorBody().string());
