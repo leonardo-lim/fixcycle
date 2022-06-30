@@ -97,6 +97,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         TextView dateContent = findViewById(R.id.date_content);
         TextView timeContent = findViewById(R.id.time_content);
         TextView requestContent = findViewById(R.id.request_content);
+        TextView pickUpAndDropMessage = findViewById(R.id.pick_up_and_drop_message);
 
         extras = getIntent().getExtras();
 
@@ -149,6 +150,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             }
 
             String request = service.getRequest();
+            boolean isPickUpAndDrop = service.isPickUpAndDrop();
 
             imageView.setImageResource(R.drawable.start);
             statusContent.setText(status);
@@ -156,6 +158,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             dateContent.setText(formattedDate.substring(0,10));
             timeContent.setText(formattedDate.substring(11,16));
             requestContent.setText(request);
+
+            if (!isPickUpAndDrop) {
+                pickUpAndDropMessage.setVisibility(View.GONE);
+            }
         }
     }
 
