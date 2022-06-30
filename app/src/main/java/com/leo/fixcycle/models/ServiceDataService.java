@@ -9,6 +9,7 @@ public class ServiceDataService implements Serializable {
     private String request;
     private String serviceTime;
     private int serviceStatus;
+    private boolean pickUpAndDrop;
 
     public int getId() {
         return id;
@@ -56,5 +57,13 @@ public class ServiceDataService implements Serializable {
 
     public void setServiceStatus(int serviceStatus) {
         this.serviceStatus = serviceStatus;
+    }
+
+    public boolean isPickUpAndDrop() {
+        return pickUpAndDrop;
+    }
+
+    public void setPickUpAndDrop(boolean pickUpAndDrop) {
+        this.pickUpAndDrop = pickUpAndDrop;
     }
 }

@@ -6,6 +6,7 @@ public class Service {
     private String request;
     private String serviceTime;
     private int serviceStatus;
+    private boolean pickUpAndDrop;
     private ServiceData data;
 
     public int getMotorcycleId() {
@@ -46,6 +47,14 @@ public class Service {
 
     public void setServiceStatus(int serviceStatus) {
         this.serviceStatus = serviceStatus;
+    }
+
+    public boolean isPickUpAndDrop() {
+        return pickUpAndDrop;
+    }
+
+    public void setPickUpAndDrop(boolean pickUpAndDrop) {
+        this.pickUpAndDrop = pickUpAndDrop;
     }
 
     public ServiceData getData() {
