@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -94,7 +95,7 @@ public class BookServiceFragment extends Fragment {
 
         selectDatebtn.setOnClickListener(v -> {
             datePickerDialog = new DatePickerDialog(getContext(),
-                    (DatePickerDialog.OnDateSetListener) (datePicker, year, month, day) -> selectDatebtn.setText(year + "-" + month + "-" + day),year,month,day);
+                    (DatePickerDialog.OnDateSetListener) (datePicker, year, month, day) -> selectDatebtn.setText(year + "-" + (month + 1) + "-" + day),year,month,day);
             datePickerDialog.show();
         });
 

@@ -26,6 +26,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -130,14 +134,27 @@ public class ServiceDetailsActivity extends AppCompatActivity {
             }
 
             String date = service.getServiceTime();
+            SimpleDateFormat tzDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat commonDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String formattedDate = null;
+
+            try {
+                Date d = tzDateFormat.parse(date);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(d);
+                calendar.add(Calendar.HOUR_OF_DAY, 7);
+                formattedDate = commonDateFormat.format(calendar.getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
 
             String request = service.getRequest();
 
             imageView.setImageResource(R.drawable.start);
             statusContent.setText(status);
             typeContent.setText(typeService);
-            dateContent.setText(date.substring(0,10));
-            timeContent.setText(date.substring(11,16));
+            dateContent.setText(formattedDate.substring(0,10));
+            timeContent.setText(formattedDate.substring(11,16));
             requestContent.setText(request);
         }
     }
