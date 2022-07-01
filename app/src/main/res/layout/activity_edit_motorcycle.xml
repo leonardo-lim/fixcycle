@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,245 +7,253 @@
     android:background="@drawable/background"
     tools:context=".activities.EditMotorcycleActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
+        android:layout_centerInParent="true">
 
-        <TextView
-            android:id="@+id/edit_motorcycle_text"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Motorcycle"
-            android:textColor="@color/navy"
-            android:textSize="28sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="30dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
-        <TextView
-            android:id="@+id/name_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
-            android:text="Name"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_motorcycle_text" />
+            <TextView
+                android:id="@+id/edit_motorcycle_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit Motorcycle"
+                android:textColor="@color/navy"
+                android:textSize="28sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/name_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle name"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_text" />
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:text="Name"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edit_motorcycle_text" />
 
-        <TextView
-            android:id="@+id/brand_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Brand"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_input" />
+            <EditText
+                android:id="@+id/name_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle name"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_text" />
 
-        <EditText
-            android:id="@+id/brand_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle brand"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brand_text" />
+            <TextView
+                android:id="@+id/brand_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Brand"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_input" />
 
-        <TextView
-            android:id="@+id/license_plate_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="License Plate"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/brand_input" />
+            <EditText
+                android:id="@+id/brand_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle brand"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/brand_text" />
 
-        <EditText
-            android:id="@+id/license_plate_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle license plate"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/license_plate_text" />
+            <TextView
+                android:id="@+id/license_plate_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="License Plate"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/brand_input" />
 
-        <TextView
-            android:id="@+id/type_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Type"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/license_plate_input" />
+            <EditText
+                android:id="@+id/license_plate_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle license plate"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/license_plate_text" />
 
-        <EditText
-            android:id="@+id/type_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle type"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/type_text" />
+            <TextView
+                android:id="@+id/type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Type"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/license_plate_input" />
 
-        <TextView
-            android:id="@+id/cylinder_capacity_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Cylinder Capacity"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/type_input" />
+            <EditText
+                android:id="@+id/type_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle type"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type_text" />
 
-        <EditText
-            android:id="@+id/cylinder_capacity_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle cylinder capacity"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_text" />
+            <TextView
+                android:id="@+id/cylinder_capacity_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Cylinder Capacity"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/type_input" />
 
-        <TextView
-            android:id="@+id/production_year_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Production Year"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_input" />
+            <EditText
+                android:id="@+id/cylinder_capacity_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle cylinder capacity"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_text" />
 
-        <EditText
-            android:id="@+id/production_year_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle production year"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            android:inputType="number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/production_year_text" />
+            <TextView
+                android:id="@+id/production_year_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Production Year"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cylinder_capacity_input" />
 
-        <TextView
-            android:id="@+id/color_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Color"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/production_year_input" />
+            <EditText
+                android:id="@+id/production_year_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle production year"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                android:inputType="number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/production_year_text" />
 
-        <EditText
-            android:id="@+id/color_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle color"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/color_text" />
+            <TextView
+                android:id="@+id/color_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Color"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/production_year_input" />
 
-        <TextView
-            android:id="@+id/fuel_type_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="10dp"
-            android:text="Fuel Type"
-            android:textColor="@color/brown"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/color_input" />
+            <EditText
+                android:id="@+id/color_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle color"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_text" />
 
-        <EditText
-            android:id="@+id/fuel_type_input"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
-            android:backgroundTint="@color/navy"
-            android:hint="Enter your motorcycle fuel type"
-            android:textSize="14sp"
-            android:textColor="@color/navy"
-            android:textColorHint="@color/beige"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuel_type_text" />
+            <TextView
+                android:id="@+id/fuel_type_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Fuel Type"
+                android:textColor="@color/brown"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/color_input" />
 
-        <Button
-            android:id="@+id/save_btn"
-            android:layout_width="80dp"
-            android:layout_height="35dp"
-            android:layout_marginTop="20dp"
-            android:paddingHorizontal="15dp"
-            android:background="@drawable/blue_rounded_button"
-            android:drawableStart="@drawable/beige_ic_baseline_save_16"
-            android:text="Save"
-            android:textSize="14sp"
-            android:textColor="@color/beige"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fuel_type_input" />
+            <EditText
+                android:id="@+id/fuel_type_input"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/brown_ic_baseline_sports_motorsports_16"
+                android:backgroundTint="@color/navy"
+                android:hint="Enter your motorcycle fuel type"
+                android:textSize="14sp"
+                android:textColor="@color/navy"
+                android:textColorHint="@color/beige"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuel_type_text" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <Button
+                android:id="@+id/save_btn"
+                android:layout_width="80dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:paddingHorizontal="15dp"
+                android:background="@drawable/blue_rounded_button"
+                android:drawableStart="@drawable/beige_ic_baseline_save_16"
+                android:text="Save"
+                android:textSize="14sp"
+                android:textColor="@color/beige"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fuel_type_input" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/loading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
