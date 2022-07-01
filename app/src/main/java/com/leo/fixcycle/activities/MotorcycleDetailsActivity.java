@@ -17,7 +17,10 @@ import android.widget.Toast;
 import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
+import com.leo.fixcycle.models.User;
+import com.leo.fixcycle.models.UserDataUser;
 import com.leo.fixcycle.networks.MotorcycleClient;
+import com.leo.fixcycle.networks.UserClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +35,7 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
     Button editButton, deleteButton;
     MotorcycleDataMotorcycle motorcycle;
     int motorcycleId;
+    boolean isAdmin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +48,38 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
         editButton.setOnClickListener(view -> openActivity());
         deleteButton.setOnClickListener(view -> showAlertDialog());
 
-        getMotorcycleDetails();
+        checkIsAdmin();
+    }
+
+    private void checkIsAdmin() {
+        SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String accessToken = sp.getString("accessToken", "");
+
+        UserClient call = new UserClient();
+
+        call.getApi().getUser("Bearer " + accessToken).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserDataUser user = response.body().getData().getUser();
+                    isAdmin = user.isAdmin();
+                    getMotorcycleDetails();
+                } else if (response.errorBody() != null) {
+                    try {
+                        JSONObject error = new JSONObject(response.errorBody().string());
+                        String message = error.getString("message");
+                        showToast(message);
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 
     private void getMotorcycleDetails() {
@@ -84,7 +119,7 @@ public class MotorcycleDetailsActivity extends AppCompatActivity {
             colorContent.setText(color);
             fuelTypeContent.setText(fuelType);
 
-            if (isDeleted) {
+            if (isDeleted || isAdmin) {
                 editButton.setVisibility(View.GONE);
                 deleteButton.setVisibility(View.GONE);
             }
