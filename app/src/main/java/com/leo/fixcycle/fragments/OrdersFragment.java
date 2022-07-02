@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
@@ -46,6 +47,8 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
     UserOrdersAdapter finishedMotorcycleAdapter;
     UserOrdersAdapter canceledMotorcycleAdapter;
 
+    ProgressBar loading;
+
     List<ServiceDataService> servicesDataHolder;
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     List<ServiceDataService> pendingOrderDataHolder = new ArrayList<>();
@@ -65,6 +68,7 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
         ongoingRecyclerView = view.findViewById(R.id.ongoing_recycler_view);
         finishedRecyclerView = view.findViewById(R.id.finished_recycler_view);
         canceledRecyclerView = view.findViewById(R.id.canceled_recycler_view);
+        loading = view.findViewById(R.id.loading);
 
         pendingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         ongoingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -86,6 +90,7 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
             String accessToken = sp.getString("accessToken", "");
 
             ServiceClient call = new ServiceClient();
+            loading.setVisibility(View.VISIBLE);
 
             call.getApi().getService("Bearer " + accessToken).enqueue(new Callback<Service>() {
                 @Override
@@ -123,11 +128,14 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
                             e.printStackTrace();
                         }
                     }
+
+                    loading.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<Service> call, Throwable t) {
                     t.printStackTrace();
+                    loading.setVisibility(View.INVISIBLE);
                 }
             });
         }
@@ -139,6 +147,7 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
             String accessToken = sp.getString("accessToken", "");
 
             MotorcycleClient call = new MotorcycleClient();
+            loading.setVisibility(View.VISIBLE);
 
             call.getApi().getMotorcycle("Bearer " + accessToken).enqueue(new Callback<Motorcycle>() {
                 @Override
@@ -155,11 +164,14 @@ public class OrdersFragment extends Fragment implements UserOrdersAdapter.OnClic
                             e.printStackTrace();
                         }
                     }
+
+                    loading.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<Motorcycle> call, Throwable t) {
                     t.printStackTrace();
+                    loading.setVisibility(View.INVISIBLE);
                 }
             });
         }

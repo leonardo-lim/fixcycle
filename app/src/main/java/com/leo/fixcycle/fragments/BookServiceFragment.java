@@ -171,8 +171,7 @@ public class BookServiceFragment extends Fragment {
             Button serviceDateBtn = view.findViewById(R.id.service_date_btn);
             Button serviceTimeBtn = view.findViewById(R.id.service_time_btn);
             CheckBox pickUpAndDropCheckBox = view.findViewById(R.id.pick_up_and_drop_check_box);
-
-//            ProgressBar loading = findViewById(R.id.loading);
+            ProgressBar loading = view.findViewById(R.id.loading);
 
             String name = selectMotorcycleBtn.getText().toString();
 
@@ -205,8 +204,7 @@ public class BookServiceFragment extends Fragment {
             service.setServiceStatus(1);
 
             ServiceClient call = new ServiceClient();
-
-//            loading.setVisibility(View.VISIBLE);
+            loading.setVisibility(View.VISIBLE);
 
             call.getApi().saveService(service, "Bearer " + accessToken).enqueue(new Callback<Service>() {
                 @Override
@@ -226,13 +224,13 @@ public class BookServiceFragment extends Fragment {
                         }
                     }
 
-//                    loading.setVisibility(View.INVISIBLE);
+                    loading.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<Service> call, Throwable t) {
                     t.printStackTrace();
-//                    loading.setVisibility(View.INVISIBLE);
+                    loading.setVisibility(View.INVISIBLE);
                 }
             });
         }

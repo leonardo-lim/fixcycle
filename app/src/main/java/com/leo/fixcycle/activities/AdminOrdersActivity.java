@@ -9,7 +9,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
@@ -44,6 +46,8 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
     IncomingOrdersAdapter incomingMotorcycleAdapter;
     OnProcessOrdersAdapter onProcessMotorcycleAdapter;
 
+    ProgressBar loading;
+
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     List<ServiceDataService> servicesDataHolder;
     List<ServiceDataService> incomingServicesDataHolder = new ArrayList<>();
@@ -58,6 +62,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
 
         incomingRecyclerView = findViewById(R.id.incoming_recycler_view);
         onProcessRecyclerView = findViewById(R.id.on_process_recycler_view);
+        loading = findViewById(R.id.loading);
 
         getService();
 
@@ -70,6 +75,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         String accessToken = sp.getString("accessToken", "");
 
         ServiceClient call = new ServiceClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().getServices("Bearer " + accessToken).enqueue(new Callback<Service>() {
             @Override
@@ -100,11 +106,14 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Service> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -114,6 +123,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         String accessToken = sp.getString("accessToken", "");
 
         MotorcycleClient call = new MotorcycleClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().getMotorcycles("Bearer " + accessToken).enqueue(new Callback<Motorcycle>() {
             @Override
@@ -130,11 +140,14 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Motorcycle> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -176,6 +189,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         service.setServiceStatus(serviceStatus);
 
         ServiceClient call = new ServiceClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().updateService(serviceId, service, "Bearer " + accessToken).enqueue(new Callback<Service>() {
             @Override
@@ -200,11 +214,14 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Service> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -214,6 +231,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         String accessToken = sp.getString("accessToken", "");
 
         InvoiceClient call = new InvoiceClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().saveInvoice(serviceId, "Bearer " + accessToken).enqueue(new Callback<Invoice>() {
             @Override
@@ -229,11 +247,14 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Invoice> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -275,6 +296,7 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
         String accessToken = sp.getString("accessToken", "");
 
         UserClient call = new UserClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().removeUser("Bearer " + accessToken).enqueue(new Callback<User>() {
             @Override
@@ -292,11 +314,14 @@ public class AdminOrdersActivity extends AppCompatActivity implements IncomingOr
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }

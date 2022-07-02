@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,7 +64,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String accessToken = sp.getString("accessToken", "");
 
+        ProgressBar loading = findViewById(R.id.loading);
+
         UserClient call = new UserClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().getUser("Bearer " + accessToken).enqueue(new Callback<User>() {
             @Override
@@ -81,11 +85,14 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -201,7 +208,10 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String accessToken = sp.getString("accessToken", "");
 
+        ProgressBar loading = findViewById(R.id.loading);
+
         ServiceClient call = new ServiceClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().removeService(serviceId, "Bearer " + accessToken).enqueue(new Callback<Motorcycle>() {
             @Override
@@ -221,11 +231,14 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Motorcycle> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }

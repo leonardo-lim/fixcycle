@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.leo.fixcycle.R;
@@ -49,7 +50,10 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Choos
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String accessToken = sp.getString("accessToken", "");
 
+        ProgressBar loading = findViewById(R.id.loading);
+
         MotorcycleClient call = new MotorcycleClient();
+        loading.setVisibility(View.VISIBLE);
 
         call.getApi().getMotorcycle("Bearer " + accessToken).enqueue(new Callback<Motorcycle>() {
             @Override
@@ -69,11 +73,14 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Choos
                         e.printStackTrace();
                     }
                 }
+
+                loading.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onFailure(Call<Motorcycle> call, Throwable t) {
                 t.printStackTrace();
+                loading.setVisibility(View.INVISIBLE);
             }
         });
     }

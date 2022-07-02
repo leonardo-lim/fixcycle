@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,8 +60,10 @@ public class HomeFragment extends Fragment {
 
             TextView welcomeText = view.findViewById(R.id.welcome_text);
             TextView balanceText = view.findViewById(R.id.balance_text);
+            ProgressBar loading = view.findViewById(R.id.loading);
 
             UserClient call = new UserClient();
+            loading.setVisibility(View.VISIBLE);
 
             call.getApi().getUser("Bearer " + accessToken).enqueue(new Callback<User>() {
                 @Override
@@ -100,11 +103,14 @@ public class HomeFragment extends Fragment {
                             e.printStackTrace();
                         }
                     }
+
+                    loading.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
                     t.printStackTrace();
+                    loading.setVisibility(View.INVISIBLE);
                 }
             });
         }
