@@ -38,7 +38,6 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/dark_navy_rounded_rectangle"
-                android:src="@drawable/ic_launcher_background"
                 android:layout_below="@id/service_details_text" />
 
             <GridLayout
@@ -87,7 +86,7 @@
                                 android:layout_below="@+id/status_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="Ongoing"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -135,7 +134,7 @@
                                 android:layout_below="@+id/type_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="Full Service"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>

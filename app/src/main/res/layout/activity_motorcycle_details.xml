@@ -35,7 +35,6 @@
                 android:layout_marginHorizontal="8dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/dark_navy_rounded_rectangle"
-                android:src="@drawable/ic_launcher_background"
                 android:layout_below="@id/motorcycle_details_text" />
 
             <GridLayout
@@ -83,7 +82,7 @@
                                 android:layout_below="@+id/name_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="CBR 150 RR"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -131,7 +130,7 @@
                                 android:layout_below="@+id/brand_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="Kawasaki"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -179,7 +178,7 @@
                                 android:layout_below="@+id/license_plate_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="D 123 XX"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -227,7 +226,7 @@
                                 android:layout_below="@+id/type_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="Sport"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
@@ -419,7 +418,7 @@
                                 android:layout_below="@+id/fuel_type_text"
                                 android:layout_marginTop="10dp"
                                 android:gravity="fill_horizontal"
-                                android:text="Pertamax"
+                                android:text=""
                                 android:textColor="@color/white" />
 
                         </RelativeLayout>
