@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MotorcycleClient {
-    private static final String BASE_URL = "http://10.0.2.2:5000/api/v1/";
+    private static final String BASE_URL = "https://fixcycle.herokuapp.com/api/v1/";
 
     public MotorcycleService getApi() {
         Retrofit retrofit = new Retrofit.Builder()
