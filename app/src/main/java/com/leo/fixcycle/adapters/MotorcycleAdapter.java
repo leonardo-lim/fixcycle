@@ -10,15 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.leo.fixcycle.R;
-import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
-public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.myviewholder>{
-
+public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.MotorcycleViewHolder> {
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     OnClickShowListener mOnClickShowListener;
 
@@ -29,14 +25,16 @@ public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.my
 
     @NonNull
     @Override
-    public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row_motorcycle,parent, false);
-        return new myviewholder(view, mOnClickShowListener);
+    public MotorcycleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.item_row_motorcycle, parent, false);
+        return new MotorcycleViewHolder(view, mOnClickShowListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MotorcycleAdapter.myviewholder holder, int position) {
+    public void onBindViewHolder(@NonNull MotorcycleAdapter.MotorcycleViewHolder holder, int position) {
         MotorcycleDataMotorcycle res = motorcyclesDataHolder.get(position);
+
         holder.img.setImageResource(R.drawable.start);
         holder.name.setText(res.getName());
         holder.brand.setText(res.getBrand());
@@ -52,27 +50,28 @@ public class MotorcycleAdapter extends RecyclerView.Adapter<MotorcycleAdapter.my
         return motorcyclesDataHolder.size();
     }
 
-    class myviewholder extends RecyclerView.ViewHolder{
+    class MotorcycleViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
-        TextView name,brand,licensePlate;
+        TextView name, brand, licensePlate;
         OnClickShowListener onClickShowListener;
-        public myviewholder(@NonNull View itemView, OnClickShowListener onClickShowListener){
-            super(itemView);
-            img= itemView.findViewById(R.id.motorcycle_img);
-            name =itemView.findViewById(R.id.motorcycle_name);
-            brand= itemView.findViewById(R.id.motorcycle_brand);
-            licensePlate=itemView.findViewById(R.id.motorcycle_license_plate);
-        }
 
+        public MotorcycleViewHolder(@NonNull View itemView, OnClickShowListener onClickShowListener) {
+            super(itemView);
+            this.onClickShowListener = onClickShowListener;
+
+            img = itemView.findViewById(R.id.motorcycle_img);
+            name = itemView.findViewById(R.id.motorcycle_name);
+            brand = itemView.findViewById(R.id.motorcycle_brand);
+            licensePlate = itemView.findViewById(R.id.motorcycle_license_plate);
+        }
     }
 
-    public interface OnClickShowListener{
+    public interface OnClickShowListener {
         void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle);
     }
 
-    public void setData(List<MotorcycleDataMotorcycle> motorcyclesDataHolder){
+    public void setData(List<MotorcycleDataMotorcycle> motorcyclesDataHolder) {
         this.motorcyclesDataHolder = motorcyclesDataHolder;
         notifyDataSetChanged();
     }
-
 }

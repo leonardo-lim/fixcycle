@@ -15,10 +15,7 @@ import android.widget.Toast;
 import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.Motorcycle;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
-import com.leo.fixcycle.models.User;
-import com.leo.fixcycle.models.UserDataUser;
 import com.leo.fixcycle.networks.MotorcycleClient;
-import com.leo.fixcycle.networks.UserClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -15,17 +15,16 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal">
 
-
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/my_motorcycle_text_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/mymoto_text_constraint"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="@id/mymoto_text_constraint"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/mymoto_text"
+                    android:id="@+id/my_motorcycle_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="30dp"
@@ -45,12 +44,12 @@
                     android:drawableStart="@drawable/beige_ic_baseline_library_add_16"
                     android:paddingHorizontal="15dp"
                     android:text=" Add Motorcycle"
-                    android:textSize="14sp"
-                    android:textColor="@color/beige"
                     android:textAllCaps="false"
+                    android:textColor="@color/beige"
+                    android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/mymoto_text" />
+                    app:layout_constraintTop_toBottomOf="@+id/my_motorcycle_text" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/no_motorcycle_message"
@@ -85,9 +84,8 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/mymoto_recycle_view"
+                android:id="@+id/my_motorcycle_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginVertical="20dp"
@@ -96,10 +94,9 @@
                 app:layout_constraintHeight_max="490dp"
                 android:paddingBottom="10dp"
                 android:background="@drawable/blue_rounded_button"
-                app:layout_constraintTop_toBottomOf="@+id/mymoto_text_constraint"
+                app:layout_constraintTop_toBottomOf="@+id/my_motorcycle_text_layout"
                 android:scrollbars="vertical"
-                android:scrollbarThumbVertical="@color/beige"
-                />
+                android:scrollbarThumbVertical="@color/beige" />
 
             <ProgressBar
                 android:id="@+id/loading"
@@ -113,7 +110,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </ScrollView>
 

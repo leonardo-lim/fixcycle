@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
 import android.os.Bundle;
-
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.leo.fixcycle.R;
@@ -37,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         if (extras != null) {
             fragmentName = extras.getString("fragmentName");
             motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("data");
-
         }
 
         switch (fragmentName) {
@@ -52,10 +49,8 @@ public class MainActivity extends AppCompatActivity {
             case "bookService":
                 BookServiceFragment bookServiceFragment = new BookServiceFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                Bundle data = extras;
-                bookServiceFragment.setArguments(data);
+                bookServiceFragment.setArguments(extras);
                 fragmentTransaction.replace(R.id.fragment_container, bookServiceFragment).commit();
-
                 bottomNavigationView.setSelectedItemId(R.id.book_service_nav);
                 break;
             case "myMotorcycle":

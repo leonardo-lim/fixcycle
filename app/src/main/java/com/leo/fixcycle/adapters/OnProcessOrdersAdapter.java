@@ -59,10 +59,10 @@ public class OnProcessOrdersAdapter extends RecyclerView.Adapter<OnProcessOrders
             super(itemView);
             this.onProcessOrdersListener = onProcessOrdersListener;
 
-            img= itemView.findViewById(R.id.motorcycle_img);
-            name =itemView.findViewById(R.id.motorcycle_name);
-            brand= itemView.findViewById(R.id.motorcycle_brand);
-            licensePlate=itemView.findViewById(R.id.motorcycle_license_plate);
+            img = itemView.findViewById(R.id.motorcycle_img);
+            name = itemView.findViewById(R.id.motorcycle_name);
+            brand = itemView.findViewById(R.id.motorcycle_brand);
+            licensePlate = itemView.findViewById(R.id.motorcycle_license_plate);
             finishServiceButton = itemView.findViewById(R.id.finish_service_btn);
 
             finishServiceButton.setOnClickListener(this);

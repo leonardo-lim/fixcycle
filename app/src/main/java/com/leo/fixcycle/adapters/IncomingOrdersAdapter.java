@@ -59,10 +59,10 @@ public class IncomingOrdersAdapter extends RecyclerView.Adapter<IncomingOrdersAd
             super(itemView);
             this.onIncomingOrdersListener = onIncomingOrdersListener;
 
-            img= itemView.findViewById(R.id.motorcycle_img);
-            name =itemView.findViewById(R.id.motorcycle_name);
-            brand= itemView.findViewById(R.id.motorcycle_brand);
-            licensePlate=itemView.findViewById(R.id.motorcycle_license_plate);
+            img = itemView.findViewById(R.id.motorcycle_img);
+            name = itemView.findViewById(R.id.motorcycle_name);
+            brand = itemView.findViewById(R.id.motorcycle_brand);
+            licensePlate = itemView.findViewById(R.id.motorcycle_license_plate);
             rejectButton = itemView.findViewById(R.id.reject_btn);
             acceptButton = itemView.findViewById(R.id.accept_btn);
 

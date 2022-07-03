@@ -35,34 +35,35 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.OnClickShowListener{
+public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.OnClickShowListener {
     RecyclerView recyclerView;
     List<MotorcycleDataMotorcycle> motorcycleDataHolder;
-    View view;
-    Button button;
+    Button addMotorcycleButton;
     MotorcycleAdapter motorcycleAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_my_motorcycle, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_motorcycle, container, false);
 
-        button =  view.findViewById(R.id.add_motorcycle_btn);
-        recyclerView = view.findViewById(R.id.mymoto_recycle_view);
+        addMotorcycleButton =  view.findViewById(R.id.add_motorcycle_btn);
+        recyclerView = view.findViewById(R.id.my_motorcycle_recycler_view);
 
-        button.setOnClickListener(v -> {
-            Intent intent = new Intent(getActivity(), AddMotorcycleActivity.class);
-            startActivity(intent);
-        });
+        addMotorcycleButton.setOnClickListener(v -> openActivity());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        motorcycleAdapter= new MotorcycleAdapter(motorcycleDataHolder,this);
-        getMotorcycle(view);
+        motorcycleAdapter = new MotorcycleAdapter(motorcycleDataHolder,this);
 
+        getMotorcycle(view);
 
         return view;
     }
 
-    private void getMotorcycle(View view){
+    private void openActivity() {
+        Intent intent = new Intent(getActivity(), AddMotorcycleActivity.class);
+        startActivity(intent);
+    }
+
+    private void getMotorcycle(View view) {
         if (getActivity() != null) {
             SharedPreferences sp = getActivity().getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
             String accessToken = sp.getString("accessToken", "");
@@ -109,14 +110,12 @@ public class MyMotorcycleFragment extends Fragment implements MotorcycleAdapter.
 
     @Override
     public void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle) {
-        Intent intent =  new Intent(getActivity(), MotorcycleDetailsActivity.class).putExtra("data",motorcycleDataMotorcycle);
-
+        Intent intent =  new Intent(getActivity(), MotorcycleDetailsActivity.class);
+        intent.putExtra("data", motorcycleDataMotorcycle);
         startActivity(intent);
     }
 
     private void showToast(String message) {
         Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
     }
-
-
 }

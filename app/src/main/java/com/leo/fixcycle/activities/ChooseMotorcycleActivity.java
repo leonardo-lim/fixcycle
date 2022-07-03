@@ -40,13 +40,12 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Choos
 
         recyclerView = findViewById(R.id.choose_moto_recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        chooseMotorcycleAdapter= new ChooseMotorcycleAdapter(motorcycleDataHolder,this);
+        chooseMotorcycleAdapter = new ChooseMotorcycleAdapter(motorcycleDataHolder, this);
+
         getMotorcycle();
-
-
     }
 
-    private void getMotorcycle(){
+    private void getMotorcycle() {
         SharedPreferences sp = getApplicationContext().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
         String accessToken = sp.getString("accessToken", "");
 
@@ -61,7 +60,6 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Choos
                 if (response.isSuccessful() && response.body() != null) {
                     List<MotorcycleDataMotorcycle> motorcyclesDataHolder = response.body().getData().getMotorcycles();
                     motorcyclesDataHolder.removeIf(MotorcycleDataMotorcycle::isDeleted);
-
                     chooseMotorcycleAdapter.setData(motorcyclesDataHolder);
                     recyclerView.setAdapter(chooseMotorcycleAdapter);
                 } else if (response.errorBody() != null) {
@@ -85,10 +83,9 @@ public class ChooseMotorcycleActivity extends AppCompatActivity implements Choos
         });
     }
 
-
     @Override
     public void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle) {
-        Intent intent = new Intent(ChooseMotorcycleActivity.this, MainActivity.class).putExtra("data",motorcycleDataMotorcycle);
+        Intent intent = new Intent(ChooseMotorcycleActivity.this, MainActivity.class).putExtra("data", motorcycleDataMotorcycle);
         intent.putExtra("fragmentName", "bookService");
         startActivity(intent);
         finish();

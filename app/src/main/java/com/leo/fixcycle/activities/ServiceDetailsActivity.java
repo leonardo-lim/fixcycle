@@ -39,7 +39,6 @@ import retrofit2.Response;
 public class ServiceDetailsActivity extends AppCompatActivity {
     MotorcycleDataMotorcycle motorcycle;
     ServiceDataService service;
-    Bundle extras;
     Button seeMotorcycleDetailsButton, seeInvoiceDetailsButton, cancelServiceButton;
     int serviceId;
     boolean isAdmin;
@@ -97,7 +96,7 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         });
     }
 
-    public void getServiceDetails(){
+    public void getServiceDetails() {
         ImageView imageView = findViewById(R.id.service_details_img);
         TextView statusContent = findViewById(R.id.status_content);
         TextView typeContent = findViewById(R.id.type_content);
@@ -106,48 +105,43 @@ public class ServiceDetailsActivity extends AppCompatActivity {
         TextView requestContent = findViewById(R.id.request_content);
         TextView pickUpAndDropMessage = findViewById(R.id.pick_up_and_drop_message);
 
-        extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
 
         if (extras != null) {
-            motorcycle = (MotorcycleDataMotorcycle) getIntent().getSerializableExtra("motorcycleData");
             service = (ServiceDataService) getIntent().getSerializableExtra("serviceData");
+
             serviceId = service.getId();
+            int serviceStatus = service.getServiceStatus();
+            int type = service.getType();
+            String serviceDateTime = service.getServiceTime();
+            String request = service.getRequest();
+            boolean isPickUpAndDrop = service.isPickUpAndDrop();
 
             String status;
-            int stat =service.getServiceStatus();
-            if(stat==1){
-                status="Pending";
-            }else if(stat==2){
-                status="Ongoing";
-            }else if(stat==3){
-                status="Finished";
-            }else{
-                status="Canceled";
+            String serviceType;
+
+            if (serviceStatus == 1) {
+                status = "Pending";
+            } else if (serviceStatus == 2) {
+                status = "Ongoing";
+            } else if (serviceStatus == 3) {
+                status = "Finished";
+            } else {
+                status = "Canceled";
             }
 
-            if (stat != 3 || isAdmin) {
-                seeInvoiceDetailsButton.setVisibility(View.GONE);
+            if (type == 1) {
+                serviceType = "Light Service";
+            } else {
+                serviceType = "Full Service";
             }
 
-            if (stat != 1 || isAdmin) {
-                cancelServiceButton.setVisibility(View.GONE);
-            }
-
-            String typeService;
-            int type = service.getType();
-            if(type==1){
-                typeService="Light Service";
-            }else{
-                typeService="Full Service";
-            }
-
-            String date = service.getServiceTime();
             SimpleDateFormat tzDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
             SimpleDateFormat commonDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String formattedDate = null;
 
             try {
-                Date d = tzDateFormat.parse(date);
+                Date d = tzDateFormat.parse(serviceDateTime);
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(d);
                 calendar.add(Calendar.HOUR_OF_DAY, 7);
@@ -156,15 +150,20 @@ public class ServiceDetailsActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            String request = service.getRequest();
-            boolean isPickUpAndDrop = service.isPickUpAndDrop();
-
             imageView.setImageResource(R.drawable.start);
             statusContent.setText(status);
-            typeContent.setText(typeService);
+            typeContent.setText(serviceType);
             dateContent.setText(formattedDate.substring(0,10));
             timeContent.setText(formattedDate.substring(11,16));
             requestContent.setText(request);
+
+            if (serviceStatus != 3 || isAdmin) {
+                seeInvoiceDetailsButton.setVisibility(View.GONE);
+            }
+
+            if (serviceStatus != 1 || isAdmin) {
+                cancelServiceButton.setVisibility(View.GONE);
+            }
 
             if (!isPickUpAndDrop) {
                 pickUpAndDropMessage.setVisibility(View.GONE);

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:padding="10dp"
     android:layout_marginHorizontal="10dp"
@@ -22,15 +21,14 @@
             android:layout_width="110dp"
             android:layout_height="105dp"
             android:layout_alignParentStart="true"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_launcher_background" />
+            android:layout_marginEnd="16dp" />
 
         <TextView
             android:id="@+id/motorcycle_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/motorcycle_img"
-            android:text="Forza"
+            android:text=""
             android:maxLength="9"
             android:maxLines="1"
             android:textColor="@color/beige"
@@ -45,9 +43,9 @@
             android:textColor="@color/white"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="Honda"
+            android:text=""
             android:layout_marginTop="4dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             android:background="@drawable/teal_rounded_rectangle"
             android:paddingHorizontal="6dp"
             android:paddingVertical="4dp"/>
@@ -59,7 +57,7 @@
             android:layout_below="@+id/motorcycle_name"
             android:layout_toEndOf="@+id/motorcycle_img"
             android:textSize="20sp"
-            android:text="D 123 XX"
+            android:text=""
             android:textColor="@color/white"
             android:paddingEnd="10dp"
             android:paddingVertical="10dp"/>
@@ -74,6 +72,7 @@
             android:background="@drawable/button_selector"
             android:layout_toEndOf="@id/motorcycle_img"
             android:layout_below="@id/motorcycle_license_plate"/>
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

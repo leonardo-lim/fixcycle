@@ -13,10 +13,9 @@ import com.leo.fixcycle.R;
 import com.leo.fixcycle.models.MotorcycleDataMotorcycle;
 import com.leo.fixcycle.models.ServiceDataService;
 
-
 import java.util.List;
 
-public class UserOrdersAdapter extends RecyclerView.Adapter<UserOrdersAdapter.ServiceOrdersViewHolder> {
+public class UserOrdersAdapter extends RecyclerView.Adapter<UserOrdersAdapter.UserOrdersViewHolder> {
     List<MotorcycleDataMotorcycle> motorcyclesDataHolder;
     List<ServiceDataService> servicesDataHolder;
     OnClickOrdersListener onClickOrdersListener;
@@ -29,14 +28,14 @@ public class UserOrdersAdapter extends RecyclerView.Adapter<UserOrdersAdapter.Se
 
     @NonNull
     @Override
-    public ServiceOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserOrdersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.item_row_motorcycle, parent, false);
-        return new ServiceOrdersViewHolder(view, onClickOrdersListener);
+        return new UserOrdersViewHolder(view, onClickOrdersListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UserOrdersAdapter.ServiceOrdersViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserOrdersAdapter.UserOrdersViewHolder holder, int position) {
         MotorcycleDataMotorcycle res = motorcyclesDataHolder.get(position);
         holder.img.setImageResource(R.drawable.start);
         holder.name.setText(res.getName());
@@ -49,20 +48,19 @@ public class UserOrdersAdapter extends RecyclerView.Adapter<UserOrdersAdapter.Se
         return motorcyclesDataHolder.size();
     }
 
-    class ServiceOrdersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class UserOrdersViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView img;
         TextView name, brand, licensePlate;
         OnClickOrdersListener onClickOrdersListener;
 
-        public ServiceOrdersViewHolder(@NonNull View itemView, OnClickOrdersListener onClickOrdersListener){
+        public UserOrdersViewHolder(@NonNull View itemView, OnClickOrdersListener onClickOrdersListener) {
             super(itemView);
-
             this.onClickOrdersListener = onClickOrdersListener;
 
-            img= itemView.findViewById(R.id.motorcycle_img);
-            name =itemView.findViewById(R.id.motorcycle_name);
-            brand= itemView.findViewById(R.id.motorcycle_brand);
-            licensePlate=itemView.findViewById(R.id.motorcycle_license_plate);
+            img = itemView.findViewById(R.id.motorcycle_img);
+            name = itemView.findViewById(R.id.motorcycle_name);
+            brand = itemView.findViewById(R.id.motorcycle_brand);
+            licensePlate = itemView.findViewById(R.id.motorcycle_license_plate);
 
             itemView.setOnClickListener(this);
         }
@@ -78,7 +76,7 @@ public class UserOrdersAdapter extends RecyclerView.Adapter<UserOrdersAdapter.Se
         void onClickShowListener(MotorcycleDataMotorcycle motorcycleDataMotorcycle, ServiceDataService serviceDataService);
     }
 
-    public void setData(List<MotorcycleDataMotorcycle> motorcyclesDataHolder, List<ServiceDataService> servicesDataHolder){
+    public void setData(List<MotorcycleDataMotorcycle> motorcyclesDataHolder, List<ServiceDataService> servicesDataHolder) {
         this.motorcyclesDataHolder = motorcyclesDataHolder;
         this.servicesDataHolder = servicesDataHolder;
         notifyDataSetChanged();
